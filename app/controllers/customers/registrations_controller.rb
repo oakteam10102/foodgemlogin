@@ -4,7 +4,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
-    redirect_to root if current_user
+    redirect_to root if customer_signed_in?
     @address = Address.new()
     super
     
@@ -49,8 +49,8 @@ class Customers::RegistrationsController < Devise::RegistrationsController
       "to" => [{"email"=>resource.email,
         }],
       }
-      # sending = mandrill.messages.send message
-      # puts sending
+      sending = mandrill.messages.send message
+      puts sending
       
       
 
