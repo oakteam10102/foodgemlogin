@@ -17,10 +17,10 @@
       <%= f.password_field :password, {autocomplete: "off", class: 'form-control'} %>
     </div>
 
-    <div class="field">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, {autocomplete: "off", class: 'form-control'} %>
-    </div>
+    <!-- <div class="field"> -->
+      <%#= f.label :password_confirmation %><br />
+      <%#= f.password_field :password_confirmation, {autocomplete: "off", class: 'form-control'} %>
+    <!-- </div> -->
 
     <%= fields_for @address do |address_form| %>
       <div class="field">
