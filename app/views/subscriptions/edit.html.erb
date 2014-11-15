@@ -1,21 +1,22 @@
 <div class="col-md-12">
-  <h3> subscription data </h3>
+  <h2> subscription data </h2>
+
   <%= form_for @subscription, url: subscription_path(@subscription), method: :patch do |f| %>
 
-  <h4> Preference </h4>
-  <table>
-    <tr>
-      <% @tracks.each do |track| %>
-        <td>
-          <%= check_box_tag('preferences[]', track, @preferences.where(track: track).any? ) %><%= " #{track} " %> &nbsp
-        </td>
-      <% end %>
-    </tr>
-  </table>
+  <h3> Preference </h3>
+  <div class="section-subheading text-muted" style="margin: 5px 0 30px 0;">Select a foodie track, but feel free to switch your preferences up to 24 hours before the delivery. </div>
+  <div class="row">
+    <% @tracks.each do |track| %>
+      <div class="goarea col-md-4 col-sm-6 portfolio-item">
+        <h4><%= check_box_tag('preferences[]', track, @preferences.where(track: track).any? ) %><%= " #{track} " %> &nbsp</h4>
+      </div>
+    <% end %>
+  </div>
+
 
   <br>
 
-  <h4> Lunch Delivery </h4>
+  <h3> Lunch Delivery </h3>
   <table>
     <tr>
       <% @days.each do |day| %>
@@ -28,7 +29,7 @@
   <%= f.label :lunch_time %>: &nbsp
   <%= f.time_select :lunch_time, {value: @subscription.lunch_time, minute_step: 15, default: {hour: '12', minute: '00'}} %>
 
-  <h4> Dinner Delivery </h4>
+  <h3> Dinner Delivery </h3>
   <table>
     <tr>
       <% @days.each do |day| %>
