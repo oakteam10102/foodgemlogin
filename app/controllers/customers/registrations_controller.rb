@@ -22,36 +22,13 @@ class Customers::RegistrationsController < Devise::RegistrationsController
     yield resource if block_given?
     if resource_saved
 
-      require 'mandrill'
-      mandrill = Mandrill::API.new ENV['FGLOGIN_MANDRILL_KEY']
-
       @address.save
 
       subscription = Subscription.new()
       subscription.customer = resource
       subscription.save
-
-      message = {"html" =>"<p> Congratulations! <br><br>
-
-        You’ve signed up for a subscription with FoodGem. Expect to have some of the most delicious food from the best restaurants in your area!<br><br>
-
-        Please contact us at info@foodgem.com with any questions you have.<br><br>
-
-        Cheers!</p>",
-                  "text"=>"Congratulations! 
-        You’ve signed up for a subscription with FoodGem. Expect to have some of the most delicious food from the best restaurants in your area!
-
-        Please contact us at info@foodgem.com with any questions you have.
-
-        Cheers!",
-      "subject"=>"Success! You Have Subscribed to FoodGem!",
-      "from_email"=> "jason@foodgem.com",
-      "to" => [{"email"=>resource.email,
-        }],
-      }
-      sending = mandrill.messages.send message
-      puts sending
       
+      WelcomeMailJob.new.async.perform(@address.customer.id)
       
 
 

@@ -44,6 +44,7 @@ gem "font-awesome-rails"
 gem 'kaminari'
 
 gem 'mandrill-api'
+gem 'sucker_punch', '~> 1.0'
 
 ruby "2.1.2"
 
