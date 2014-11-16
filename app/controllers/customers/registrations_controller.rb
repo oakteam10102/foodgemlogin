@@ -23,7 +23,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
     if resource_saved
 
       require 'mandrill'
-      mandrill = Mandrill::API.new '7RZIKxnlpNkJrGW8sN5Utw'
+      mandrill = Mandrill::API.new ENV['FGLOGIN_MANDRILL_KEY']
 
       @address.save
 
@@ -45,7 +45,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
 
         Cheers!",
       "subject"=>"Success! You Have Subscribed to FoodGem!",
-      "from_email"=> "noreply@foodgem.com",
+      "from_email"=> "jason@foodgem.com",
       "to" => [{"email"=>resource.email,
         }],
       }
