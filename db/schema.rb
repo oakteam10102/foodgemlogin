@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141110211549) do
+ActiveRecord::Schema.define(version: 20141119222928) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -101,9 +101,11 @@ ActiveRecord::Schema.define(version: 20141110211549) do
     t.text     "extra_notes"
     t.time     "lunch_time"
     t.time     "dinner_time"
+    t.string   "payment_status"
   end
 
   add_index "subscriptions", ["customer_id"], name: "index_subscriptions_on_customer_id"
+  add_index "subscriptions", ["payment_status"], name: "index_subscriptions_on_payment_status"
 
   create_table "tracks", force: true do |t|
     t.string   "name"
