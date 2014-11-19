@@ -181,9 +181,9 @@
     <% else %>
       <em> No address defined </em><br><br>
       <%= link_to "Edit address", new_address_path %>
-
     <% end %>
-
+    <br/><br/>
+	<%= link_to "Your Food Preference Quiz", quiz_path(@subscription.id), {class: 'btn btn-primary'} %>
     
   </div>
 </div>

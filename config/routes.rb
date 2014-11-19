@@ -28,7 +28,12 @@ Rails.application.routes.draw do
   resources :addresses, only: [:new, :edit, :update]
 
   resources :subscriptions, only: [:create, :edit, :update, :new]
-
+  get  'subscriptions/:id/payment', to: 'subscriptions#payment'
+  post 'subscriptions/:id/update_area', to: 'subscriptions#update_area'
+  post 'subscriptions/:id/update_day_lunch', to: 'subscriptions#update_day_lunch'
+  post 'subscriptions/:id/update_day_dinner', to: 'subscriptions#update_day_dinner'
+  post 'subscriptions/:id/update_preferences', to: 'subscriptions#update_preferences'
+  get  'subscriptions/:id/quiz', to: 'subscriptions#preference_quiz', as: 'quiz'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

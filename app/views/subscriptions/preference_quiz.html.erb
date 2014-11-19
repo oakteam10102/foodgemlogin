@@ -1,0 +1,561 @@
+  <style>
+    .form-wrapper input {
+        width: 80%;
+        height: 60px;
+        padding: 10px 5px;
+        float: left;    
+        font: bold 15px 'lucida sans', 'trebuchet MS', 'Tahoma';
+        border: 0;
+        background: #eee;
+        -moz-border-radius: 3px 0 0 3px;
+        -webkit-border-radius: 3px 0 0 3px;
+        border-radius: 3px 0 0 3px;      
+    }
+    .form-wrapper input:focus {
+        outline: 0;
+        background: #fff;
+        -moz-box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
+        -webkit-box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
+        box-shadow: 0 0 2px rgba(0,0,0,.8) inset;
+    }
+    .form-wrapper input::-webkit-input-placeholder {
+       color: #999;
+       font-weight: normal;
+       font-style: italic;
+    }
+    .form-wrapper input:-moz-placeholder {
+        color: #999;
+        font-weight: normal;
+        font-style: italic;
+    }
+    
+    .form-wrapper input:-ms-input-placeholder {
+        color: #999;
+        font-weight: normal;
+        font-style: italic;
+    }    
+    
+    .form-wrapper button {
+        overflow: visible;
+        position: relative;
+        float: right;
+        border: 0;
+        padding: 0;
+        cursor: pointer;
+        height: 60px;
+        width: 20%;
+        font: bold 15px/40px 'lucida sans', 'trebuchet MS', 'Tahoma';
+        color: #fff;
+        text-transform: uppercase;
+        background: #fed136;
+        -moz-border-radius: 0 3px 3px 0;
+        -webkit-border-radius: 0 3px 3px 0;
+        border-radius: 0 3px 3px 0;      
+        text-shadow: 0 -1px 0 rgba(0, 0 ,0, .3);
+    }   
+      
+    .form-wrapper button:hover{     
+        background: #FF9933;
+    }   
+      
+    .form-wrapper button:active,
+    .form-wrapper button:focus{   
+        background: #FF9933;    
+    }
+   
+    .form-wrapper button:before {
+        content: '';
+        position: absolute;
+        border-width: 8px 8px 8px 0;
+        border-style: solid solid solid none;
+        border-color: transparent #fed136 transparent;
+        top: 20px;
+        left: -6px;
+    }
+    
+    .form-wrapper button:hover:before{
+        border-right-color: #FF9933;
+    }
+    
+    .form-wrapper button:focus:before{
+        border-right-color: #fed136;
+    }    
+    
+    .form-wrapper button::-moz-focus-inner {
+        border: 0;
+        padding: 0;
+    }
+    .selectday { background-color: #fed136; }
+    .selectday:hover, .selectday.darkorange { background-color: #FF9933; }
+
+    .selectedtrack {
+    	background-color: rgba(255, 156, 0, 0.901961);
+	    opacity: '100%';
+    }
+</style>
+    
+    <!-- Services Section -->
+    <section id="services" style="padding: 10px 0 0 0;">
+        <div style="display:none;"> <iframe src="https://docs.google.com/forms/d/1BppgbmHPvFqTJImrhVbKEpswRGvrjOifX1UnlhymWt0/viewform?embedded=true" width="760" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe></div>
+        <div class="container" >
+            <div class="row text-center">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-1">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Grid Section  -->
+   <section id="portfolio" class="bg-light-gray preferences" style="padding: 10px 0 0 0;">
+       <div class="container quiz">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Food Quiz</h2>
+                    <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;">Let us learn what types of food you like so we can deliver food you love.</h3>
+                </div>
+            </div>
+<!-- 1 questions -->
+ <form action="" class="quiz">
+     <div class="question1">
+            <div class="row" style="margin-left:0px;margin-right: 0px;">
+                <h3 class="section-heading" style="color:#fed136;font-style:italic; text-align: center;margin-top: 0;">Which of these do you want to eat RIGHT NOW? </h3>
+		<ul class="ca-menu">
+		<li>
+				<div class="food-item" style="width:210px; height:210px;background-image:url(<%= asset_path("1.jpg") %>);margin:0;border-radius: 125px;">
+				    <input id="q1_ans1" type="checkbox" onclick="question2_show()">
+				    <label for="q1_ans1"></label>
+
+				    <div class="food-hover" style="border-radius: 125px;">
+				        <i class="fa fa-thumbs-o-up fa-3x"></i>
+				    </div>
+				</div>
+		</li>
+		<li>
+				<div class="food-item" style="width:210px; height:210px;background-image:url(<%= asset_path("2.jpg") %>);margin:0;border-radius: 125px;">
+				    <input id="q1_ans2" type="checkbox" onclick="question2_show()">
+				    <label for="q1_ans2"></label>
+
+				    <div class="food-hover"  style="border-radius: 125px;">
+				        <i class="fa fa-thumbs-o-up fa-3x"></i>
+				    </div>
+				</div>
+		</li>
+		<li>
+				<div class="food-item" style="width:210px; height:210px;background-image:url(<%= asset_path("3.jpg") %>);margin:0;border-radius: 125px;">
+				    <input id="q1_ans3" type="checkbox" onclick="question2_show()">
+				    <label for="q1_ans3"></label>
+
+				    <div class="food-hover" style="border-radius: 125px;">
+				        <i class="fa fa-thumbs-o-up fa-3x"></i>
+				    </div>
+				</div>
+		</li>
+		<li>
+				<div class="food-item" style="width:210px; height:210px;background-image:url(<%= asset_path("4.jpg") %>);margin:0;border-radius: 125px;">
+				    <input id="q1_ans4" type="checkbox" onclick="question2_show()">
+				    <label for="q1_ans4"></label>
+
+				    <div class="food-hover"  style="border-radius: 125px;">
+				        <i class="fa fa-thumbs-o-up fa-3x"></i>
+				    </div>
+				</div>
+		</li>
+	    </ul>                
+      </div>     
+        <div id="progress_bar" class="ui-progress-bar ui-container">
+            <div class="ui-progress" style="display:none; width: 0%;">
+                <span class="ui-label" style="display:none;"> <b class="value">0%</b></span>
+            </div>
+        </div>     
+     </div>
+</form>
+
+
+            
+  <!-- 2 questions -->
+ <form action="" class="quiz" >
+     <div class="question2" style="display: none;">
+            <div class="row" style="margin-left:0px;margin-right: 0px;">
+                <h3 class="section-heading" style="color:#fed136;font-style:italic; text-align: center;margin-top: 0;">Which of these types do you prefer? </h3>
+		<ul class="ca-menu">
+		<li>
+				<div class="food-item" style="width:210px; height:210px;background-image:url(<%= asset_path("21.jpg") %>);margin:0;border-radius: 125px;">
+				    <input id="q2_ans1" type="checkbox" onclick="question3_show()">
+				    <label for="q2_ans1"></label>
+
+				    <div class="food-hover" style="border-radius: 125px;">
+				        <i class="fa fa-thumbs-o-up fa-3x"></i>
+				    </div>
+				</div>
+		</li>
+		<li>
+				<div class="food-item" style="width:210px; height:210px;background-image:url(<%= asset_path("22.jpg") %>);margin:0;border-radius: 125px;">
+				    <input id="q2_ans2" type="checkbox" onclick="question3_show()">
+				    <label for="q2_ans2"></label>
+
+				    <div class="food-hover"  style="border-radius: 125px;">
+				        <i class="fa fa-thumbs-o-up fa-3x"></i>
+				    </div>
+				</div>
+		</li>
+		<li>
+				<div class="food-item" style="width:210px; height:210px;background-image:url(<%= asset_path("23.jpg") %>);margin:0;border-radius: 125px;">
+				    <input id="q2_ans3" type="checkbox" onclick="question3_show()">
+				    <label for="q2_ans3"></label>
+
+				    <div class="food-hover" style="border-radius: 125px;">
+				        <i class="fa fa-thumbs-o-up fa-3x"></i>
+				    </div>
+				</div>
+		</li>
+		<li>
+				<div class="food-item" style="width:210px; height:210px;background-image:url(<%= asset_path("24.jpg") %>);margin:0;border-radius: 125px;">
+				    <input id="q2_ans4" type="checkbox" onclick="question3_show()">
+				    <label for="q2_ans4"></label>
+
+				    <div class="food-hover"  style="border-radius: 125px;">
+				        <i class="fa fa-thumbs-o-up fa-3x"></i>
+				    </div>
+				</div>
+		</li>
+	    </ul>                
+      </div>
+     
+            <div id="progress_bar" class="ui-progress-bar ui-container">
+            <div class="ui-progress" style="width: 20%;">
+                <span class="ui-label"> <b class="value">20%</b></span>
+            </div>
+            </div>
+
+     </div>
+</form>
+
+        
+  <!-- 3 questions -->
+ <form action="" class="quiz" >
+     <div class="question3" style="display: none;">
+            <div class="row" style="margin-left:0px;margin-right: 0px;">
+                <h3 class="section-heading" style="color:#fed136;font-style:italic; text-align: center;margin-top: 0;"> Which nationality of cuisine do you prefer? </h3>
+		<ul class="ca-menu">
+		<li>
+				<div class="food-item" style="width:210px; height:210px;background-image:url(<%= asset_path("31.jpg") %>);margin:0;border-radius: 125px;">
+				    <input id="q3_ans1" type="checkbox" onclick="question4_show()">
+				    <label for="q3_ans1"></label>
+
+				    <div class="food-hover" style="border-radius: 125px;">
+                                        <h5 style="color:white;">indian</h5>
+				        <i class="fa fa-thumbs-o-up fa-3x"></i>
+				    </div>
+				</div>
+		</li>
+		<li>
+				<div class="food-item" style="width:210px; height:210px;background-image:url(<%= asset_path("32.jpg") %>);margin:0;border-radius: 125px;">
+				    <input id="q3_ans2" type="checkbox" onclick="question4_show()">
+				    <label for="q3_ans2"></label>
+
+				    <div class="food-hover"  style="border-radius: 125px;">
+                                        <h5 style="color:white;">American</h5>
+				        <i class="fa fa-thumbs-o-up fa-3x"></i>
+				    </div>
+				</div>
+		</li>
+		<li>
+				<div class="food-item" style="width:210px; height:210px;background-image:url(<%= asset_path("33.jpg") %>);margin:0;border-radius: 125px;">
+				    <input id="q3_ans3" type="checkbox" onclick="question4_show()">
+				    <label for="q3_ans3"></label>
+
+				    <div class="food-hover" style="border-radius: 125px;">
+                                        <h5 style="color:white;">Chinese</h5>
+				        <i class="fa fa-thumbs-o-up fa-3x"></i>
+				    </div>
+				</div>
+		</li>
+		<li>
+				<div class="food-item" style="width:210px; height:210px;background-image:url(<%= asset_path("34.jpg") %>);margin:0;border-radius: 125px;">
+				    <input id="q3_ans4" type="checkbox"  onclick="question4_show()">
+				    <label for="q3_ans4"></label>
+
+				    <div class="food-hover"  style="border-radius: 125px;">
+                                        <h5 style="color:white;">Mexican</h5>
+				        <i class="fa fa-thumbs-o-up fa-3x"></i>
+				    </div>
+				</div>
+		</li>
+	    </ul>                
+      </div>     
+            <div id="progress_bar" class="ui-progress-bar ui-container">
+            <div class="ui-progress" style="width: 40%;">
+                <span class="ui-label"> <b class="value">40%</b></span>
+            </div>
+            </div>    
+     </div>
+</form>
+
+  <!-- 4 questions -->
+ <form action="" class="quiz" >
+     <div class="question4" style="display: none;">
+            <div class="row" style="margin-left:0px;margin-right: 0px;">
+                <h3 class="section-heading" style="color:#fed136;font-style:italic; text-align: center;margin-top: 0;"> Which type of taste do you prefer? </h3>
+		<ul class="ca-menu">
+		<li>
+				<div class="food-item" style="width:210px; height:210px;background-image:url(<%= asset_path("41.jpg") %>);margin:0;border-radius: 125px;">
+				    <input id="q4_ans1" type="checkbox"  onclick="question5_show()">
+				    <label for="q4_ans1"></label>
+
+				    <div class="food-hover" style="border-radius: 125px;">
+                                        <h5 style="color:white;">Sugar</h5>
+                                        <h5 style="color:white;">(sweet)</h5>
+				        <i class="fa fa-thumbs-o-up fa-3x"></i>
+				    </div>
+				</div>
+		</li>
+		<li>
+				<div class="food-item" style="width:210px; height:210px;background-image:url(<%= asset_path("42.jpg") %>);margin:0;border-radius: 125px;">
+				    <input id="q4_ans2" type="checkbox"  onclick="question5_show()">
+				    <label for="q4_ans2"></label>
+
+				    <div class="food-hover"  style="border-radius: 125px;">
+                                        <h5 style="color:white;">Vinegar</h5>
+                                        <h5 style="color:white;">(sour)</h5>
+				        <i class="fa fa-thumbs-o-up fa-3x"></i>
+				    </div>
+				</div>
+		</li>
+		<li>
+				<div class="food-item" style="width:210px; height:210px;background-image:url(<%= asset_path("43.jpg") %>);margin:0;border-radius: 125px;">
+				    <input id="q4_ans3" type="checkbox"  onclick="question5_show()">
+				    <label for="q4_ans3"></label>
+
+				    <div class="food-hover" style="border-radius: 125px;">
+                                        <h5 style="color:white;">Hot Pepper</h5>
+                                        <h5 style="color:white;">(Spicy)</h5>
+				        <i class="fa fa-thumbs-o-up fa-3x"></i>
+				    </div>
+				</div>
+		</li>
+		<li>
+				<div class="food-item" style="width:210px; height:210px;background-image:url(<%= asset_path("44.jpg") %>);margin:0;border-radius: 125px;">
+				    <input id="q4_ans4" type="checkbox"  onclick="question5_show()">
+				    <label for="q4_ans4"></label>
+
+				    <div class="food-hover"  style="border-radius: 125px;">
+                                        <h5 style="color:white;">Salt</h5>
+                                        <h5 style="color:white;">(salty)</h5>
+				        <i class="fa fa-thumbs-o-up fa-3x"></i>
+				    </div>
+				</div>
+		</li>
+	    </ul>                
+      </div>     
+            <div id="progress_bar" class="ui-progress-bar ui-container">
+            <div class="ui-progress" style="width: 60%;">
+                <span class="ui-label"> <b class="value">60%</b></span>
+            </div>
+            </div>     
+     </div>
+</form>              
+            
+  <!-- 5 questions -->
+ <form action="" class="quiz" >
+     <div class="question5" style="display: none;">
+            <div class="row" style="margin-left:0px;margin-right: 0px;">
+                <h3 class="section-heading" style="color:#fed136;font-style:italic; text-align: center;margin-top: 0;"> Optional: Enter the name of your favorite restaurant? </h3>
+		<input autofocus="autofocus" class="form-control2" id="restaurants1"  style="margin-left:0px; margin-right: 0px;"> 
+      </div>
+          <div class="row" style="padding: 20px 0 20px 0; ">
+                <div class="col-lg-12 text-center">
+                    <input class="goday"  onclick="question6_show()" style="font-size: 26pt; padding: 10px 20px; border-radius: 3px; text-transform: uppercase; color: #fff; background-color: #fed136; cursor: pointer; border:none;" type="button" value="Select">  <!-- onClick="window.location='./quiz-edit4.html'"> -->
+                </div>
+            </div>
+            <div id="progress_bar" class="ui-progress-bar ui-container">
+                <div class="ui-progress" style="width: 80%;">
+                    <span class="ui-label"> <b class="value">80%</b></span>
+                </div>
+            </div>
+     </div>
+</form>
+ 
+<!-- 6 questions -->
+ <form action="" class="quiz" >
+     <div class="question6" style="display: none;">
+            <div class="row" style="margin-left:0px;margin-right: 0px;">
+                <h3 class="section-heading" style="color:#fed136;font-style:italic; text-align: center;margin-top: 0;"> Do you have allergies or aversion to certain foods? </h3>
+                <h3 class="section-heading" style="color:#fed136;font-style:italic; text-align: center;margin-top: 0;"> you can select multiple </h3>
+		<ul class="ca-menu">
+		<li>
+				<div class="food-item" style="width:210px; height:210px;background-image:url(<%= asset_path("61.jpg") %>);margin:0;border-radius: 125px;">
+				    <input id="q6_ans1" type="checkbox" >
+				    <label for="q6_ans1"></label>
+				    <div class="food-hover" style="border-radius: 125px;">
+                                        <h5 style="color:white;">Peanuts</h5>
+				        <i class="fa fa-plus fa-3x"></i>
+				    </div>
+				</div>
+		</li>
+		<li>
+				<div class="food-item" style="width:210px; height:210px;background-image:url(<%= asset_path("62.jpg") %>);margin:0;border-radius: 125px;">
+				    <input id="q6_ans2" type="checkbox" >
+				    <label for="q6_ans2"></label>
+
+				    <div class="food-hover"  style="border-radius: 125px;">
+                                        <h5 style="color:white;">Cilantro</h5>
+				        <i class="fa fa-plus fa-3x"></i>
+				    </div>
+				</div>
+		</li>
+		<li>
+				<div class="food-item" style="width:210px; height:210px;background-image:url(<%= asset_path("63.jpg") %>);margin:0;border-radius: 125px;">
+				    <input id="q6_ans3" type="checkbox">
+				    <label for="q6_ans3"></label>
+
+				    <div class="food-hover" style="border-radius: 125px;">
+                                        <h5 style="color:white;">Milk</h5>
+				        <i class="fa fa-plus fa-3x"></i>
+				    </div>
+				</div>
+		</li>
+		<li>
+				<div class="food-item" style="width:210px; height:210px;background-image:url(<%= asset_path("64.jpg") %>);margin:0;border-radius: 125px;">
+				    <input id="q6_ans4" type="checkbox" >
+				    <label for="q6_ans4"></label>
+
+				    <div class="food-hover"  style="border-radius: 125px;">
+                                        <h5 style="color:white;">Egg</h5>
+				        <i class="fa fa-plus fa-3x"></i>
+				    </div>
+				</div>
+		</li>
+   		<li>
+				<div class="food-item" style="width:210px; height:210px;background-image:url(<%= asset_path("65.jpg") %>);margin:0;border-radius: 125px;">
+				    <input id="q6_ans5" type="checkbox" >
+				    <label for="q6_ans5"></label>
+
+				    <div class="food-hover" style="border-radius: 125px;">
+                                        <h5 style="color:white;">Fish</h5>
+				        <i class="fa fa-plus fa-3x"></i>
+				    </div>
+				</div>
+		</li>
+		<li>
+				<div class="food-item" style="width:210px; height:210px;background-image:url(<%= asset_path("66.jpg") %>);margin:0;border-radius: 125px;">
+				    <input id="q6_ans6" type="checkbox" >
+				    <label for="q6_ans6"></label>
+
+				    <div class="food-hover"  style="border-radius: 125px;">
+                                        <h5 style="color:white;">Shellfish</h5>
+				        <i class="fa fa-plus fa-3x"></i>
+				    </div>
+				</div>
+		</li>
+		<li>
+				<div class="food-item" style="width:210px; height:210px;background-image:url(<%= asset_path("67.jpg") %>);margin:0;border-radius: 125px;">
+				    <input id="q6_ans7" type="checkbox">
+				    <label for="q6_ans7"></label>
+
+				    <div class="food-hover" style="border-radius: 125px;">
+                                        <h5 style="color:white;">Soy</h5>
+				        <i class="fa fa-plus fa-3x"></i>
+				    </div>
+				</div>
+		</li>
+		<li>
+				<div class="food-item" style="width:210px; height:210px;background-image:url(<%= asset_path("68.jpg") %>);margin:0;border-radius: 125px;">
+				    <input id="q6_ans8" type="checkbox" >
+				    <label for="q6_ans8"></label>
+
+				    <div class="food-hover"  style="border-radius: 125px;">
+                                        <h5 style="color:white;">Gluten</h5>
+				        <i class="fa fa-plus fa-3x"></i>
+				    </div>
+				</div>
+		</li>
+	    </ul>     
+                 <input autofocus="autofocus" class="form-control2" id="allergies_other" placeholder="other" style="margin-left:0px; margin-right: 0px;"> 
+      </div>
+      <div id="progress_bar" class="ui-progress-bar ui-container">
+                <div class="ui-progress" style="width: 100%;">
+                    <span class="ui-label"> <b class="value">100%</b></span>
+                </div>
+            </div>
+           <div class="row" style="padding: 20px 0 20px 0; ">
+                <div class="col-lg-12 text-center">
+                    <input class="goday"  onclick="question7_show()" style="font-size: 26pt; padding: 10px 20px; border-radius: 3px; text-transform: uppercase; color: #fff; background-color: #fed136; cursor: pointer; border:none;" type="button" value="Select">  <!-- onClick="window.location='./quiz-edit4.html'"> -->
+                </div>
+            </div>
+     </div>
+ </form>  
+   
+ 	<!-- 7 questions -->
+ 	<form action="" class="quiz" >
+     <div class="question7" style="display: none;">
+            <div class="row" style="margin-left:0px;margin-right: 0px;">
+                <h3 class="section-heading" style="color:#fed136;font-style:italic; text-align: center;margin-top: 0;"> Thanks for taking the survey. We're compiling your entry! Please email <a href="mailto:jason@foodgem.com">jason@foodgem.com </a> for your resulting FoodGem code </h3>
+      </div>
+            <div class="row" style="padding: 20px 0 20px 0; display:none; ">
+                <div class="col-lg-12 text-center">
+                    <input class="goday"  onclick="some_result()" style="font-size: 26pt; padding: 10px 20px; border-radius: 3px; text-transform: uppercase; color: #fff; background-color: #fed136; cursor: pointer; border:none;" type="submit" value="Select">  <!-- onClick="window.location='./quiz-edit4.html'"> -->
+                </div>
+            </div>
+     </div>
+	</form>  
+	</div>
+</section>
+
+
+    <section id="portfolio" class="bg-light-gray thankyou" style="padding: 50px 0 50px 0; display: none;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Thank you</h2>
+                    <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;">We'll be emailing you soon to confirm your sign-up and <a href="./payment.html" style="color: #777;  text-decoration: none;">payment</a>. Feel free to contact us too at food@foodgem.com.  </h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="padding: 200px 0 0 0;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Thanks!</h4>
+            </div>
+            <div class="modal-body" >
+                <!-- The form is placed inside the body of modal -->
+                <form id="loginForm" method="post" class="form-horizontal">
+                    Thank you for signing up, our team will be reaching out within the next 24 hours!
+                    <br/>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function question2_show() {
+       $(".question1").slideToggle();
+       $(".question2").slideToggle();
+    }
+    function question3_show() {
+        $(".question2").slideToggle();
+        $(".question3").slideToggle();
+     }
+     function question4_show() {
+       $(".question3").slideToggle();
+       $(".question4").slideToggle();
+     }  
+     function question5_show() {
+        $(".question4").slideToggle();
+        $(".question5").slideToggle();
+     } 
+     function question6_show() {
+        $(".question5").slideToggle();
+        $(".question6").slideToggle();
+     }  
+     function question7_show() {
+        $(".question6").slideToggle();
+        $(".question7").slideToggle();
+     }       
+</script>  
