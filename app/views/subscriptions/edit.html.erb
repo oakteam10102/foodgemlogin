@@ -367,15 +367,6 @@
         				return $(this).val()
     			  }).get();		
         $(this).children().css('opacity', '100');    
-   //      var myData = { "preferences[]": t_names};  
-// 	   	jQuery.ajax({
-// 			type: "POST", 
-// 			url: "./update_preferences", 
-// 			data:myData, 
-// 			success:function(response)
-// 			{},
-// 			error:function (xhr, ajaxOptions, thrownError){}
-// 		});
     }
     
     $( ".goday" ).click(function() {
@@ -413,7 +404,6 @@
 						alert(thrownError);
 					}
 			    });
-               // $(".pagesend").attr("href", "http://foodgem.com/site/send.php?" + 'email=' + semail + '&phone=' + sphone + '&zipcode=' + szipcode);
             }
     });
 
@@ -433,17 +423,6 @@
 			lunch_arr1.push($.trim(lunchslistarr1[i]));  
  			$(".edit_subscription").append("<input type='hidden' value='"+$.trim(lunchslistarr1[i])+"' name='lunch[]' id='hidden_lunch'>");
 		});
-		// var myData = { "lunch[]": lunch_arr1};  
-// 	    jQuery.ajax({
-// 			type: "POST", // HTTP method POST or GET
-// 			url: "./update_day_lunch", //Where to make Ajax calls
-// 			data:myData, //Form variables
-// 			success:function(response)
-// 			{
-// 				window.location.href = "./payment";
-// 			},
-// 			error:function (xhr, ajaxOptions, thrownError){}
-// 		});
     });
     
     $(".selectday_dinner").click(function() {
@@ -457,17 +436,6 @@
  			$(".edit_subscription").append("<input type='hidden' value='"+$.trim(dinnerslistarr1[i])+"' name='dinner[]' id='hidden_dinner'>");
       		dinner_arr1.push($.trim(dinnerslistarr1[i]));  
 		});
-// 		var myData = { "dinner[]": dinner_arr1};  
-// 	    jQuery.ajax({
-// 			type: "POST", // HTTP method POST or GET
-// 			url: "./update_day_dinner", //Where to make Ajax calls
-// 			data:myData, //Form variables
-// 			success:function(response)
-// 			{
-// 				window.location.href = "./payment";
-// 			},
-// 			error:function (xhr, ajaxOptions, thrownError){}
-// 		});
     });
 
     function getURLParameter(url, name) {
