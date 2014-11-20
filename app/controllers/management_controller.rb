@@ -21,9 +21,7 @@ class ManagementController < ApplicationController
       end
     else
       @customers = Customer.page(params[:page]).per(25)
-
     end
-
   end
 
   def update_meal
@@ -31,6 +29,9 @@ class ManagementController < ApplicationController
     if @subscription.update(meal_params)
       redirect_to management_subscription_url(q: @subscription.customer.email)
     end
+  end
+  
+  def update_payment_status
   end
 
   def edit_subscription
