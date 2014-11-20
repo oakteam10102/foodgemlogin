@@ -25,7 +25,6 @@ class ManagementController < ApplicationController
   end
 
   def update_meal
-  	puts "update_meal --> #{params[:subscription][:payment_status]}"
     @subscription = Subscription.find(params[:id])
     if @subscription.update(meal_params)
       redirect_to management_subscription_url(q: @subscription.customer.email)
@@ -33,7 +32,6 @@ class ManagementController < ApplicationController
   end
   
   def update_payment_status
-  	puts "update_payment_status --> #{params[:subscription][:payment_status]}"
   	@subscription = Subscription.find(params[:id])
     if @subscription.update(payment_params)
       redirect_to management_subscription_url
