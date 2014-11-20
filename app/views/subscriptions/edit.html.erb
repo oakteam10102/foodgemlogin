@@ -325,7 +325,7 @@
 <form id="foo" style="display: none;" >
     <input id="email" name="address[email]" type="text" value="<%= @address.email %>">
     <input id="phone" name="address[phone]" type="text" value="<%= @address.phone %>">
-    <input id="zipcode" name="address[zip]" type="text" value="<%= @address.zip %>">
+    <input id="zipcode" name="address[zip]" type="text" value="">
     <input type="submit" value="Send">
 </form>
 <script>
@@ -391,20 +391,20 @@
                 $(".day").slideToggle();
                 $(".navarea").css('color', '#777');
                 $(".navday").css('color', '#fed136');
-				var myData = { "address[email]": semail, "address[phone]": sphone, "address[zip]": szipcode};  
-	        	jQuery.ajax({
-					type: "POST", // HTTP method POST or GET
-					url: "./update_area", //Where to make Ajax calls
-					data:myData, //Form variables
-					success:function(response)
-					{
-					},
-					error:function (xhr, ajaxOptions, thrownError)
-					{	
-						//On error, we alert user
-						alert(thrownError);
-					}
-			    });
+			// 	var myData = { "address[email]": semail, "address[phone]": sphone, "address[zip]": szipcode};  
+// 	        	jQuery.ajax({
+// 					type: "POST", // HTTP method POST or GET
+// 					url: "./update_area", //Where to make Ajax calls
+// 					data:myData, //Form variables
+// 					success:function(response)
+// 					{
+// 					},
+// 					error:function (xhr, ajaxOptions, thrownError)
+// 					{	
+// 						//On error, we alert user
+// 						alert(thrownError);
+// 					}
+// 			    });
             }
     });
 
