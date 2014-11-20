@@ -2,30 +2,42 @@
 
 <%= paginate @customers %> 
 <div class="row">
-  <div class="col-sm-4">
+  <div class="col-sm-3">
     Email
   </div>
-  <div class="col-sm-4">
+  <div class="col-sm-7">
     Payment Status
   </div>
-  <div class="col-sm-4">
+  <div class="col-sm-2">
     Action
   </div>
 </div>
 <br>
 <% @customers.each do |customer| %>
   <div class="row">
-    <div class="col-sm-4">    <%= "#{customer}  " %> </div>
-    <div class="col-sm-4">
-      <%= customer.subscription.payment_status %>
+    <div class="col-sm-3">    <%= "#{customer}  " %> </div>
+    <div class="col-sm-7">     
+      <%  @subscription = customer.subscription %>
+      <%= form_for @subscription, url: management_update_payment_status_path, html: {method: "post", class: "form-horizontal", role: "form"} do |f| %>
+		<div class="form-group">
+ 		 	<%= hidden_field_tag(:id, customer.subscription.id) %>
+  			<%= label_tag(:payment_status, "Payment status:", {class: "col-sm-3 control-label",style: "text-align: left;"}) %>
+  			<div class="col-sm-8">
+     			 <div class="input-group">
+     			    <% payment_methods = ["Paid","Unpaid"] %>	
+					 <%= f.select(:payment_status,payment_methods.map {|s| [s, s]},{},{ :class => 'form-control' }) %>
+       		 		 <span class="input-group-btn">
+         		 		<%= f.submit("Update", class: "btn btn-primary") %>
+       		 	 	</span>
+      			</div>
+   	 		</div>
+		</div>
+	  <% end %>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-2">
       <%= link_to 'View', management_subscription_path(q: customer.email) %>
     </div>
-
   </div>
   <br>
 <% end %>
-
-
 <%= paginate @customers %> 

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   post 'management/subscription', to: 'management#update_meal', as: 'management_update_meal'
   
-  post 'management/subscription', to: 'management#update_payment_status', as: 'management_update_payment_status'
+  post 'management/update_payment_status', to: 'management#update_payment_status', as: 'management_update_payment_status'
 
   get 'management/edit_subscription/:id', to: 'management#edit_subscription', as: "management_edit_subscription"
   patch 'management/edit_subscription/:id', to: 'management#update_subscription'
