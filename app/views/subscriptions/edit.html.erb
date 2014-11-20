@@ -120,21 +120,6 @@
             </div>
 
             <div class="row">
-                <% i = 0 %>
-            	<% @track_images = ["http://www.abc.net.au/news/image/853746-3x2-940x627.jpg",
-            					    "http://s4.favim.com/orig/50/club-delicious-food-lunch-sanwich-Favim.com-460453.jpg", 
-            						"http://julievr.wpengine.netdna-cdn.com/wp-content/uploads/2011/08/Simons-chickpea-dish.jpg", 
-            						"http://www.vegkitchen.com/wp-content/uploads/2012/08/Seitan-avocado-wrap.jpg", 
-            						"http://1.bp.blogspot.com/_0DNo0eySp-8/TSL7oN98tFI/AAAAAAAAAQE/6Y6M6fvxXqM/s400/sushi-india-japanese-cuisine.jpg" , 
-            						"http://taylormarshall.com/wp-content/uploads/2013/12/Mexican-Food-for-Guadalupe.jpg"] %>	
-	            						
-            	<% @track_desc  = [ "Burgers, Cheese-Steaks, Sausage" ,
-            					    "The most popular tasty dishes!", 
-            						"Chickpeas, Curry, Tofu", 
-            						"Pastas, Salads, Casseroles", 
-            						"Sushi, Shrimp, Lobster-Rolls" , 
-            						"Mexican, Chinese, Indian, etc"] %>	 		
-
                	<% @tracks.each do |track| %> 
         		  <div class="goarea col-md-4 col-sm-6 portfolio-item" style="height: 354px;">
                     <a class="portfolio-link selecttrack" data-toggle="modal" onclick="select_track(<%= track.id %>);">
@@ -143,15 +128,14 @@
                                 <i class="fa fa-plus fa-3x"></i>
                             </div>
                         </div>
-                        <img src="<%= @track_images[i] %>" class="img-responsive" alt="">
+                        <img src="<%= track.image %>" class="img-responsive" alt="">
                         <input type="hidden" id="track_<%= track.id %>" name="track[]" value="<%= track %>" class="<%= 'select-track-name' if @preferences.where(track: track).any? %>"/>
                     </a>
                     <div class="portfolio-caption">
                         <h4><%= " #{track} " %></h4>
-                        <p class="text-muted"><%= @track_desc[i] %></p><a href="http://foodgem.com/beta/rating.html" class="starmargin" style="display: block;font-family: FontAwesome; margin:0 auto; text-decoration: none;"><i class="fa fa-star starclr"></i><i class="fa fa-star starclr"></i><i class="fa fa-star starclr"></i><i class="fa fa-star starclr"></i><i class="fa fa-star-half-full starclr"></i> [182 <i class="fa fa-group"></i>]<br></a>
+                        <p class="text-muted"><%= track.description %></p><a href="http://foodgem.com/beta/rating.html" class="starmargin" style="display: block;font-family: FontAwesome; margin:0 auto; text-decoration: none;"><i class="fa fa-star starclr"></i><i class="fa fa-star starclr"></i><i class="fa fa-star starclr"></i><i class="fa fa-star starclr"></i><i class="fa fa-star-half-full starclr"></i> [182 <i class="fa fa-group"></i>]<br></a>
                     </div>
                   </div>
-        		  <% i = i +1 %>
     			<% end %>
             </div>
         </div>
