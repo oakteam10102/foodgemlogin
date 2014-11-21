@@ -14,7 +14,6 @@ class Customer < ActiveRecord::Base
   def send_welcome_email
     require 'mandrill'
     mandrill = Mandrill::API.new ENV['FGLOGIN_MANDRILL_KEY']
-
     
 
     message = {"html" =>"<p> Congratulations! <br><br>

@@ -6,7 +6,7 @@ class ManagementController < ApplicationController
     @query = params[:q]
 
     unless @query.blank?
-      @customer = Customer.find_by_email(@query)
+      @customer = Customer.find_by_email(@query.strip)
       if @customer
         @subscription = Subscription.find_by_customer_id(@customer.id)
         if @subscription
@@ -20,7 +20,7 @@ class ManagementController < ApplicationController
         end
       end
     else
-      @customers = Customer.page(params[:page]).per(25)
+   	  @customers = Customer.joins(:subscription).order("subscriptions.payment_status").page(params[:page]).per(100)
     end
   end
 
@@ -94,7 +94,6 @@ class ManagementController < ApplicationController
   end
 
   private
-
     def subscription_params
       params.require(:subscription).permit(:lunch_time, :dinner_time, :extra_notes)
     end

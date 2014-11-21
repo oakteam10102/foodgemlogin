@@ -2,38 +2,24 @@
 
 <%= paginate @customers %> 
 <div class="row">
-  <div class="col-sm-3">
+  <div class="col-sm-4">
     Email
   </div>
-  <div class="col-sm-6">
+  <div class="col-sm-4">
     Payment Status
   </div>
-  <div class="col-sm-3">
+  <div class="col-sm-4">
     Action
   </div>
 </div>
 <br>
 <% @customers.each do |customer| %>
   <div class="row">
-    <div class="col-sm-3">    <%= "#{customer}  " %> </div>
-    <div class="col-sm-6">     
-      <%  @subscription = customer.subscription %>
-      <%= form_for @subscription, url: management_update_payment_status_path, html: {method: "post", class: "form-horizontal", role: "form"} do |f| %>
-		<div class="form-group">
- 		 	<%= hidden_field_tag(:id, customer.subscription.id) %>
-  			<div class="col-sm-10">
-     			 <div class="input-group">
-     			    <% payment_methods = ["Paid","Unpaid"] %>	
-					 <%= f.select(:payment_status,payment_methods.map {|s| [s, s]},{},{ :class => 'form-control' }) %>
-       		 		 <span class="input-group-btn">
-         		 		<%= f.submit("Update", class: "btn btn-primary") %>
-       		 	 	</span>
-      			</div>
-   	 		</div>
-		</div>
-	  <% end %>
+    <div class="col-sm-4">    <%= "#{customer}  " %> </div>
+    <div class="col-sm-4">     
+      <%=  customer.subscription.payment_status %>
     </div>
-    <div class="col-sm-3">
+    <div class="col-sm-4">
       <%= link_to 'View', management_subscription_path(q: customer.email) %>
     </div>
   </div>

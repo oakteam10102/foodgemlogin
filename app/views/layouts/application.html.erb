@@ -12,8 +12,6 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 
-
-
   <!-- Custom Fonts -->
 
   <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -28,29 +26,22 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
   <![endif]-->
 <%= yield :head %>
-
 </head>
-<body id="page-top" class="index">
 
+<body id="page-top" class="index">
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
 
 <%= render "layouts/navbar" %>
 
 <div class="container">
-
-<%= yield %>
-
+	<%= yield %>
 </div>
 
 <%= render "layouts/footer" %>
-
 <%= params.inspect if Rails.env.development? %>
-
 <!-- Plugin JavaScript -->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-
-
 
 </body>
 </html>
