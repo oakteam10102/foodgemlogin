@@ -18,12 +18,8 @@
 <% if @subscription %>
   <%= render 'subscriptions_show' %>
 <% else %>
-  <% if @query.blank? %>
-    <%= render 'customers_index' %>
-  <% else %>
-    
-    No data for <%= @query %>
-  <% end %>
+  <%= render 'customers_index' %>
+
 
 <% end %>
   

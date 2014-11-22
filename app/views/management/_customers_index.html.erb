@@ -1,28 +1,32 @@
 <h3> All customers </h3>
 
-<%= paginate @customers %> 
-<div class="row">
-  <div class="col-sm-4">
-    Email
-  </div>
-  <div class="col-sm-4">
-    Payment Status
-  </div>
-  <div class="col-sm-4">
-    Action
-  </div>
-</div>
-<br>
-<% @customers.each do |customer| %>
+<% if @customers.empty? %>
+  <p>No data for <%= @query %></p>
+<% else %>
+  <%= paginate @customers %> 
   <div class="row">
-    <div class="col-sm-4">    <%= "#{customer}  " %> </div>
-    <div class="col-sm-4">     
-      <%=  customer.subscription.payment_status %>
+    <div class="col-sm-4">
+      Email
     </div>
     <div class="col-sm-4">
-      <%= link_to 'View', management_subscription_path(q: customer.email) %>
+      Payment Status
+    </div>
+    <div class="col-sm-4">
+      Action
     </div>
   </div>
   <br>
+  <% @customers.each do |customer| %>
+    <div class="row">
+      <div class="col-sm-4">    <%= "#{customer}  " %> </div>
+      <div class="col-sm-4">     
+        <%=  customer.subscription.payment_status %>
+      </div>
+      <div class="col-sm-4">
+        <%= link_to 'View', management_subscription_path(q: customer.email) %>
+      </div>
+    </div>
+    <br>
+  <% end %>
+  <%= paginate @customers %> 
 <% end %>
-<%= paginate @customers %> 

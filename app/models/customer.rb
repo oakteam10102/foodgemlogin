@@ -11,6 +11,15 @@ class Customer < ActiveRecord::Base
     email
   end
 
+  def self.search(query)
+    if query.blank?
+      self.all
+    else
+      where('email LIKE ?', "%#{query}%").joins(:subscription).order("subscriptions.payment_status")
+    end
+  end
+
+
   def send_welcome_email
     require 'mandrill'
     mandrill = Mandrill::API.new ENV['FGLOGIN_MANDRILL_KEY']

@@ -6,8 +6,10 @@ class ManagementController < ApplicationController
     @query = params[:q]
 
     unless @query.blank?
-      @customer = Customer.find_by_email(@query.strip)
-      if @customer
+      
+      @customers = Customer.search(@query).page(params[:page]).per(100)
+      if @customers.count == 1
+        @customer = @customers.first
         @subscription = Subscription.find_by_customer_id(@customer.id)
         if @subscription
           @preferences = @subscription.preferences
