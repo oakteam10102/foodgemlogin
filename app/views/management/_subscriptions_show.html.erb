@@ -1,6 +1,7 @@
-<p>Subscription for <b><%= @customer %></b><br>
-<%= link_to 'Edit customer account', management_edit_customer_path(@customer) %>
+<h3>Subscription for <b><%= @customer %></b><br></h3>
+<p><%= link_to 'Edit customer account', management_edit_customer_path(@customer) %>
 </p>
+
 
 
 <p> Preferred tracks: 
@@ -41,6 +42,32 @@
     </p>
     <%= link_to 'Edit subscription', management_edit_subscription_path(@subscription) %>
   </p>
+
+<h3> Delivery address </h3> 
+<% if @address %>
+  <%= "#{@address.first_name} #{@address.last_name}" %><br>
+  <i class="fa fa-phone"></i>
+  <% if @address.phone.blank? %>
+    <em> Unprovided </em> &nbsp &nbsp
+<% else %>
+  <%= " #{@address.phone}"  %> &nbsp &nbsp
+<% end %>
+<i class="fa fa-envelope"></i>
+<% if @address.email.blank? %>
+    <em> Unprovided </em>
+<% else %>
+  <%= " #{@address.email}"  %>
+<% end %><br><br>
+  <%= "#{@address.street_address} #{@address.suite}" %><br>
+  <%= "#{@address.city} #{@address.state} #{@address.zip}" %><br>
+
+<% else %>
+  <em> No address defined </em><br><br>
+
+<% end %>
+<br/><br/>
+
+<h3> Quick management </h3>
 
 <%= form_for @subscription, url: management_update_meal_path, html: {method: "post", class: "form-horizontal", role: "form"} do |f| %>
 <div class="form-group">

@@ -20,6 +20,7 @@ class ManagementController < ApplicationController
           @lunch_time = @subscription.lunch_time ? @subscription.lunch_time.strftime('%H,%M') : "default time" 
           @dinner_time = @subscription.dinner_time ? @subscription.dinner_time.strftime('%H,%M') : "default time" 
         end
+        @address = Address.find_by_customer_id(@customer.id)
       end
     else
    	  @customers = Customer.joins(:subscription).order("subscriptions.payment_status").page(params[:page]).per(100)
