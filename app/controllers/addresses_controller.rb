@@ -1,4 +1,5 @@
 class AddressesController < ApplicationController
+  before_action :authenticate_customer!
   def edit
     @address = current_customer.address
     @address = Address.new(customer: current_customer) unless @address
