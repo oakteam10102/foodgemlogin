@@ -79,8 +79,8 @@ Rails.application.configure do
     config.action_mailer.smtp_settings = {
 	:address   => "smtp.mandrillapp.com",
 	:port      => 587, # I also tried ports 25 and 587
-	:user_name => Rails.application.secrets.MANDRILL_USERNAME,
-	:password  => Rails.application.secrets.MANDRILL_APIKEY
+	:user_name => ENV['FGLOGIN_MANDRILL_USERNAME'],
+	:password  => ENV['FGLOGIN_MANDRILL_KEY']
   }
 
 	# ActionMailer Config

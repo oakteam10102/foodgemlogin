@@ -34,4 +34,16 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+  config.action_mailer.smtp_settings = {
+	:address   => "smtp.mandrillapp.com",
+	:port      => 25, # I also tried ports 25 and 587
+	:user_name => Rails.application.secrets.FGLOGIN_MANDRILL_USERNAME,
+	:password  => Rails.application.secrets.FGLOGIN_MANDRILL_KEY
+  }
+
+	# ActionMailer Config
+	config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+	config.action_mailer.delivery_method = :smtp
+	config.action_mailer.perform_deliveries = true
+	config.action_mailer.raise_delivery_errors = true
 end
