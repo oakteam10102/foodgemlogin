@@ -105,12 +105,10 @@ class SubscriptionsController < ApplicationController
   private
     def preference_params
     end
-
     def subscription_params
       params.require(:subscription).permit(:lunch_time, :dinner_time, :extra_notes)
     end
 	def address_params
       params.require(:address).permit(:first_name, :last_name, :street_address, :suite, :city, :state, :zip, :phone, :email)
     end
-
 end

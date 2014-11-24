@@ -37,7 +37,7 @@ class ManagementController < ApplicationController
   def update_payment_status
   	@subscription = Subscription.find(params[:id])
     if @subscription.update(payment_params)
-      redirect_to management_subscription_url
+      redirect_to management_subscription_url(q: @subscription.customer.email)
     end
   end
 

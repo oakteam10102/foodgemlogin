@@ -75,4 +75,17 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+  
+    config.action_mailer.smtp_settings = {
+	:address   => "smtp.mandrillapp.com",
+	:port      => 587, # I also tried ports 25 and 587
+	:user_name => Rails.application.secrets.MANDRILL_USERNAME,
+	:password  => Rails.application.secrets.MANDRILL_APIKEY
+  }
+
+	# ActionMailer Config
+	config.action_mailer.default_url_options = { :host => 'fglogintau.herokuapp.com' }
+	config.action_mailer.delivery_method = :smtp
+	config.action_mailer.perform_deliveries = true
+	config.action_mailer.raise_delivery_errors = true
 end

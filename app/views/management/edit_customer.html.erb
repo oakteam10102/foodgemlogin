@@ -1,16 +1,18 @@
+<div class="col-md-12">
 <h2> Change account </h2>
 <h4><%= @customer %> </h4>
 
 <%= form_for(@customer, :url => { :action => "update_customer" } ) do |f| %>
   <div class="field">
     <%= f.label :password, "Password" %><br />
-    <%= f.password_field :password, :autocomplete => "off"  %>
+    <%= f.password_field :password, :autocomplete => "off" , class: 'form-control' %>
   </div>
   <div class="field">
     <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation %>
+    <%= f.password_field :password_confirmation , class: 'form-control'%>
   </div><br>
   <div class="action_container">
     <%= f.submit class: 'btn btn-primary' %>
   </div>
 <% end %>
+</div>
