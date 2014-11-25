@@ -117,7 +117,7 @@
                 <div class="col-md-1">
                 </div>
                 <div class="col-md-10">
-                    <h4 class="service-heading" style="color: #777;"><span style="color: #fed136;" class="navpreferences"> Choose Preferences </span>&nbsp;&nbsp;▸&nbsp;&nbsp;<span class="navday goday">Choose Delivery Time</span> </h4>
+                    <h4 class="service-heading" style="color: #777;"><span style="color: #fed136;" class="navpreferences gopreferences"> Choose Preferences </span>&nbsp;&nbsp;▸&nbsp;&nbsp;<span class="navfollowfriend gofollowfriend"> Follow friend track </span>&nbsp;&nbsp;▸&nbsp;&nbsp;<span class="navday goday">Choose Delivery Time</span> </h4>
                 </div>
                 <div class="col-md-1">
                 </div>
@@ -154,6 +154,39 @@
     			<% end %>
             </div> 
 		</div>	       
+    </section>
+
+    <section id="portfolio" class="bg-light-gray followfriend" style="padding: 50px 0 0 0; display: none;">  
+        <div class="container">           
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Follow a Friend Track</h2>
+                    <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;">List of friend's foodie tracks to follow. </h3>
+                </div>
+            </div>
+
+            <div class="row">
+                <% @tracks.each do |track| %> 
+                  <div class="goday col-md-4 col-sm-6 portfolio-item" style="height: 354px;">
+                    <a class="portfolio-link selecttrack" data-toggle="modal" onclick="select_track(<%= track.id %>);">
+                        <div class="portfolio-hover <%= 'portfolio-darkorange-hover' if @preferences.where(track: track).any? %>" id="portfolio_<%= track.id %>">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="<%= track.image %>" class="img-responsive" alt="">
+                        <input type="hidden" id="track_<%= track.id %>" name="track[]" value="<%= track %>" class="<%= 'select-track-name' if @preferences.where(track: track).any? %>"/>
+                    </a>
+                    <div class="portfolio-caption">
+                        <% c = Customer.joins(subscription: {preferences: :track}).where("tracks.id=?", track.id) %>
+                        <h4><%= " #{track} " %></h4>
+                        <p class="text-muted"><%= track.description %></p>
+                        <p class="text-muted"><%= pluralize(c.count, 'person') %> follow this track</p>
+                    </div>
+                  </div>
+                <% end %>
+            </div>
+        </div>         
     </section>
     
     <section id="portfolio" class="bg-light-gray day" style="padding: 50px 0 50px 0; display: none;">
@@ -308,14 +341,25 @@
     			  }).get();		
          $(this).children().css('opacity', '100');    
     }
-    
-    $( ".goday" ).click(function() {
-        $(".preferences").slideToggle();
-        $(".navpreferences").css('color', '#777');
-        $(".day").slideToggle();
-        $(".navday").css('color', '#fed136');
+
+    $( ".gopreferences" ).click(function() {
+        showGoPreferences();
+        hideGoDay();
+        hideGoFollowFriend();
     });
 
+    $( ".gofollowfriend" ).click(function() {
+        showGoFollowFriend();
+        hideGoPreferences();
+        hideGoDay();
+    });
+    
+    $( ".goday" ).click(function() {
+        showGoDay();
+        hideGoPreferences();
+        hideGoFollowFriend();
+    });
+    
     $( ".gosubmit" ).click(function() {
        //    $(".day").slideToggle();
        //    $(".thankyou").slideToggle();
@@ -350,4 +394,37 @@
     function getURLParameter(url, name) {
 	    return (RegExp(name + '=' + '(.+?)(&|$)').exec(url)||[,null])[1];
 	}
+
+    function showGoPreferences(){
+        $(".preferences").slideDown();        
+        $(".navpreferences").css('color', '#fed136');
+    }
+
+    function showGoDay(){        
+        $(".day").slideDown();
+        $(".navday").css('color', '#fed136');
+    }
+
+    function showGoFollowFriend(){        
+        $(".followfriend").slideDown();
+        $(".navfollowfriend").css('color', '#fed136');
+    }
+
+    function hideGoPreferences(){
+        $('.preferences').hide();
+        $(".navpreferences").css('color', '#777');
+    }
+
+    function hideGoDay(){
+        $('.day').hide();
+        $(".navday").css('color', '#777');
+    }
+
+    function hideGoFollowFriend(){
+        $('.followfriend').hide();
+        $(".navfollowfriend").css('color', '#777');
+    }
+
+
+
 </script>
