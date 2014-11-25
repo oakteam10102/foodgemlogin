@@ -36,6 +36,10 @@ default_url_options :host => "localhost:3030"
   post 'subscriptions/:id/update_day_dinner', to: 'subscriptions#update_day_dinner'
   post 'subscriptions/:id/update_preferences', to: 'subscriptions#update_preferences'
   get  'subscriptions/:id/quiz', to: 'subscriptions#preference_quiz', as: 'quiz'
+
+  namespace :management do
+    resources :allergens
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

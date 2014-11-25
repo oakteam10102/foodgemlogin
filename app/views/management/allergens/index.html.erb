@@ -1,0 +1,8 @@
+<h1> List of allergens </h1>
+<ol>
+  <% @allergens.each do |allergen| %>
+    <li><%= allergen %></li>
+  <% end %>
+</ol>
+
+<%= link_to "Add an allergen", new_management_allergen_path %>

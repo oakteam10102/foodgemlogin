@@ -1,0 +1,17 @@
+<div class='col-md-8 col-md-offset-2'>
+<h2>New allergen</h2>
+<%= form_for @allergen, url: {controller: 'management/allergens', action: 'create'} do |f| %>
+
+  <% if @allergen.errors.any? %>
+    <ul>
+      <% @allergen.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name, class: 'form-control' %><br>
+  <%= f.submit "Create allergen", class: 'btn btn-primary' %>
+<% end %>
+</div>
