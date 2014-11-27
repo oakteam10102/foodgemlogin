@@ -14,10 +14,18 @@ class CustomersController < ApplicationController
       @dinner_time = @subscription.dinner_time ? @subscription.dinner_time.strftime('%H:%M') : 'time unset'
     end
     
+    @allergens = @customer.allergens
+
+
     @address = @customer.address
     @address = Address.create(customer: @customer) unless @address
     @phone = @address.phone
 
 
+  end
+
+  def edit_allergies
+    @customer = Customer.find(params[:id])
+    redirect_to root_url if @customer != current_customer
   end
 end

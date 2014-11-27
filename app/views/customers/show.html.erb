@@ -158,6 +158,19 @@
     <em>No subscription data</em>
     <% end %>
 
+    <h3> Allergies </h3>
+    <% if @allergens.empty? %>
+        <p> No allergy registered </p>
+    <% else %>
+        <ol>
+        <% @allergens.each do |allergen| %>
+            <li><%= allergen %></li> 
+        <% end %>
+        </ol>
+    <% end %>
+    <%= link_to "Edit allergies", edit_allergies_customer_path(@customer) %>
+
+
     <h3> Delivery address </h3> 
     <% if @address %>
       <%= "#{@address.first_name} #{@address.last_name}" %><br>
