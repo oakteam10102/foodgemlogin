@@ -135,7 +135,7 @@
             </div>
 
             <div class="row">
-               	<% @tracks.each do |track| %> 
+               	<% @main_tracks.each do |track| %> 
         		  <div class="goday col-md-4 col-sm-6 portfolio-item" style="height: 354px;">
                     <a class="portfolio-link selecttrack" data-toggle="modal" onclick="select_track(<%= track.id %>);">
                         <div class="portfolio-hover <%= 'portfolio-darkorange-hover' if @preferences.where(track: track).any? %>" id="portfolio_<%= track.id %>">
@@ -166,7 +166,7 @@
             </div>
 
             <div class="row">
-                <% @tracks.each do |track| %> 
+                <% @follow_a_friend_tracks.each do |track| %> 
                   <div class="goday col-md-4 col-sm-6 portfolio-item" style="height: 354px;">
                     <a class="portfolio-link selecttrack" data-toggle="modal" onclick="select_track(<%= track.id %>);">
                         <div class="portfolio-hover <%= 'portfolio-darkorange-hover' if @preferences.where(track: track).any? %>" id="portfolio_<%= track.id %>">

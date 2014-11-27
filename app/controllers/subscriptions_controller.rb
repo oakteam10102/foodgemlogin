@@ -11,6 +11,8 @@ class SubscriptionsController < ApplicationController
     @dinners = [] unless @dinners
     @address = current_customer.address
     @tracks = Track.all
+    @main_tracks = Track.main_tracks
+    @follow_a_friend_tracks = Track.follow_a_friend_tracks
     @preferences = Preference.where(subscription: @subscription)
     @days = DAYS
   end
