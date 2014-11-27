@@ -197,74 +197,74 @@
                     <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;">Select which day of the week you'd like your weekly FoodGem Box! <br>Our default times are 12pm and 7pm but you can change it. <br>In our beta, we only allow one selection per week per order. </h3>
                 </div>
             </div>
-            <%= form_for @subscription do |f| %>
-            <div class="row text-center" style="padding: 20px 0 20px 0; ">
-                <h3 class="section-subheading text-muted" style="margin: 5px 0 20px 0;">Lunch Delivery</h3>
-                <div class="col-md-2 text-center">
+            <%= form_for @subscription, :html => { :role => 'form'} do |f| %>
+                <div class="row text-center" style="padding: 20px 0 20px 0; ">
+                    <h3 class="section-subheading text-muted" style="margin: 5px 0 20px 0;">Lunch Delivery</h3>
+                    <div class="col-md-2 text-center">
+                    </div>
+                    <div class="col-md-8 text-center" style="color: #fff;">
+                    	<% @days.each do |day| %>
+          					<a id="fill-spreadsheet" class="gosubmit page-scroll select-day selectday_lunch <%= 'darkorange_lunch' if @lunches.include?(day) %>"><%= " #{day} " %></a>
+      					<% end %>
+                    </div>
+                    <div class="col-md-2 text-center">
+                    </div>
                 </div>
-                <div class="col-md-8 text-center" style="color: #fff;">
-                	<% @days.each do |day| %>
-      					<a id="fill-spreadsheet" class="gosubmit page-scroll select-day selectday_lunch <%= 'darkorange_lunch' if @lunches.include?(day) %>"><%= " #{day} " %></a>
-  					<% end %>
+                <div class="row text-center" style="padding: 10px 0px 5px; ">
+                    <h3 class="section-subheading text-muted" style="margin: 5px 0 10px 0;">Lunch Time</h3>
+                    <div class="col-md-3 col-sm-1 col-xs-0 text-center">
+                    </div>
+                    <div class="col-md-6 col-sm-10 col-xs-12 text-center">                
+                    	<%= f.time_select :lunch_time, {value: @subscription.lunch_time, minute_step: 15, ampm: true, default: {hour: '12', minute: '00'}},{ :class => 'form-control-day' } %>                
+                    </div>
+                    <div class="col-md-3 col-sm-1 col-xs-0 text-center">
+                    </div>
+                </div>        
+                  			
+                <div class="row text-center" style="padding: 10px 0px 20px; ">
+                    <h3 class="section-subheading text-muted" style="margin: 5px 0 20px 0;">Dinner Delivery</h3>
+                    <div class="col-md-2 text-center">
+                    </div>
+                    <div class="col-md-8 text-center" style="color: #fff; ">
+                    	<% @days.each do |day| %>
+          					<a id="fill-spreadsheet" class="gosubmit page-scroll select-day selectday_dinner <%= 'darkorange_dinner' if @dinners.include?(day) %>"><%= " #{day} " %></a>
+      					<% end %> 
+                    </div>
+                    <div class="col-md-2 text-center">
+                    </div> 
                 </div>
-                <div class="col-md-2 text-center">
-                </div>
-            </div>
-            <div class="row text-center" style="padding: 10px 0px 5px; ">
-                <h3 class="section-subheading text-muted" style="margin: 5px 0 10px 0;">Lunch Time</h3>
-                <div class="col-md-3 col-sm-1 col-xs-0 text-center">
-                </div>
-                <div class="col-md-6 col-sm-10 col-xs-12 text-center">                
-                	<%= f.time_select :lunch_time, {value: @subscription.lunch_time, minute_step: 15, ampm: true, default: {hour: '12', minute: '00'}},{ :class => 'form-control-day' } %>                
-                </div>
-                <div class="col-md-3 col-sm-1 col-xs-0 text-center">
-                </div>
-            </div>        
-              			
-            <div class="row text-center" style="padding: 10px 0px 20px; ">
-                <h3 class="section-subheading text-muted" style="margin: 5px 0 20px 0;">Dinner Delivery</h3>
-                <div class="col-md-2 text-center">
-                </div>
-                <div class="col-md-8 text-center" style="color: #fff; ">
-                	<% @days.each do |day| %>
-      					<a id="fill-spreadsheet" class="gosubmit page-scroll select-day selectday_dinner <%= 'darkorange_dinner' if @dinners.include?(day) %>"><%= " #{day} " %></a>
-  					<% end %> 
-                </div>
-                <div class="col-md-2 text-center">
+                <div class="row text-center" style="padding: 10px 0px 10px; ">
+                    <h3 class="section-subheading text-muted" style="margin: 5px 0 10px 0;">Dinner Time</h3>
+                    <div class="col-md-3 col-sm-1 col-xs-0 text-center">
+                    </div>
+                    <div class="col-md-6 col-sm-10 col-xs-12 text-center">                
+                    	<%= f.time_select :dinner_time, {value: @subscription.lunch_time, minute_step: 15, ampm: true, default: {hour: '12', minute: '00'}},{ :class => 'form-control-day' } %>                
+                    </div>
+                    <div class="col-md-3 col-sm-1 col-xs-0 text-center">
+                    </div>
                 </div> 
-            </div>
-            <div class="row text-center" style="padding: 10px 0px 10px; ">
-                <h3 class="section-subheading text-muted" style="margin: 5px 0 10px 0;">Dinner Time</h3>
-                <div class="col-md-3 col-sm-1 col-xs-0 text-center">
-                </div>
-                <div class="col-md-6 col-sm-10 col-xs-12 text-center">                
-                	<%= f.time_select :dinner_time, {value: @subscription.lunch_time, minute_step: 15, ampm: true, default: {hour: '12', minute: '00'}},{ :class => 'form-control-day' } %>                
-                </div>
-                <div class="col-md-3 col-sm-1 col-xs-0 text-center">
-                </div>
-            </div> 
 
-            
-            <div class="row text-center" style="padding: 10px 0px 20px;">
-            	<h3 class="section-subheading text-muted" style="margin: 5px 0 10px 0;">Extra Notes</h3>
-                <div class="col-md-3 col-sm-1 col-xs-0 text-center">
+                
+                <div class="row text-center" style="padding: 10px 0px 20px;">
+                	<h3 class="section-subheading text-muted" style="margin: 5px 0 10px 0;">Extra Notes</h3>
+                    <div class="col-md-3 col-sm-1 col-xs-0 text-center">
+                    </div>
+                    <div class="col-md-6 col-sm-10 col-xs-12 text-center">
+      					<%= f.text_area :extra_notes, {size: "60x8", placeholder:"Comments and extra requests",:class => 'form-control' } %>
+                    </div>
+                    <div class="col-md-3 col-sm-1 col-xs-0 text-center">
+                    </div>
                 </div>
-                <div class="col-md-6 col-sm-10 col-xs-12 text-center">
-  					<%= f.text_area :extra_notes, {size: "60x8", placeholder:"Comments and extra requests",:class => 'form-control' } %>
-                </div>
-                <div class="col-md-3 col-sm-1 col-xs-0 text-center">
-                </div>
-            </div>
-            <div class="row text-center" style="padding: 10px 0px 20px;">
-                <div class="col-md-3 text-center">
-                </div>
-                <div class="col-md-6 text-center">
-  					 <%= submit_tag "Save changes", {class: 'btn btn-primary'} %>
-  					 <%= link_to 'Cancel', root_url, {class: 'btn btn-primary'} %>
-                </div>
-                <div class="col-md-3 text-center">
-                </div>
-            </div>           
+                <div class="row text-center" style="padding: 10px 0px 20px;">
+                    <div class="col-md-3 text-center">
+                    </div>
+                    <div class="col-md-6 text-center">
+      					 <%= submit_tag "Save changes", {class: 'btn btn-primary'} %>
+      					 <%= link_to 'Cancel', root_url, {class: 'btn btn-primary'} %>
+                    </div>
+                    <div class="col-md-3 text-center">
+                    </div>
+                </div>           
             <% end %>
             <div class="col-lg-12 text-center">
             </div>

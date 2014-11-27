@@ -7,6 +7,6 @@ class Subscription < ActiveRecord::Base
   serialize :dinner
 
   def to_s
-    customer.email
+    customer.email rescue ""
   end
 end

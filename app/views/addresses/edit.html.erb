@@ -1,6 +1,6 @@
 
 
-<%= form_for @address, url: address_path(@address), method: :patch do |f| %>
+<%= form_for @address, url: address_path(@address), method: :patch, :html => {:role => 'form'} do |f| %>
 <% if @address.errors.any? %>
   <ul>
     <% @address.errors.full_messages.each do |msg| %>
