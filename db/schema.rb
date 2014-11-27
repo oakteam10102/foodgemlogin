@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141125223636) do
+ActiveRecord::Schema.define(version: 20141127224643) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -69,6 +69,16 @@ ActiveRecord::Schema.define(version: 20141125223636) do
     t.datetime "updated_at"
   end
 
+  create_table "allergies", force: true do |t|
+    t.integer  "customer_id"
+    t.integer  "allergen_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "allergies", ["allergen_id"], name: "index_allergies_on_allergen_id"
+  add_index "allergies", ["customer_id"], name: "index_allergies_on_customer_id"
+
   create_table "customers", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -119,6 +129,7 @@ ActiveRecord::Schema.define(version: 20141125223636) do
     t.datetime "updated_at"
     t.string   "description"
     t.string   "image"
+    t.string   "track_type"
   end
 
 end

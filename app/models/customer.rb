@@ -6,6 +6,8 @@ class Customer < ActiveRecord::Base
 
   has_one :subscription
   has_one :address 
+  has_many :allergies
+  has_many :allergens, through: :allergies
 
   def to_s
     email
