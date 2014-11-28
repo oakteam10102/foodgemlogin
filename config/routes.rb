@@ -46,6 +46,7 @@ default_url_options :host => "localhost:3030"
   get  'subscriptions/:id/quiz', to: 'subscriptions#preference_quiz', as: 'quiz'
 
   get 'customers/:id/edit_allergies', to: 'customers#edit_allergies', as: 'edit_allergies_customer'
+  patch 'customers/:id/edit_allergies', to: 'customers#update_allergies', as: 'update_allergies_customer'
   namespace :management do
     resources :allergens
   end
