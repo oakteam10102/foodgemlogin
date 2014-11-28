@@ -3,6 +3,6 @@ class Allergen < ActiveRecord::Base
   has_many :allergies
   has_many :customers, through: :allergies
   def to_s
-    name
+    name.capitalize
   end
 end
