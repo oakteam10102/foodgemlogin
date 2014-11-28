@@ -14,5 +14,18 @@ ActiveAdmin.register Preference do
   #   permitted
   # end
 
+  index do
+    selectable_column
+    id_column
+    column "Subscription" do |preference|
+      preference.subscription.customer
+    end
+    column "Track" do |preference|
+      preference.track.name
+    end
+
+    column :created_at
+    actions
+  end
 
 end
