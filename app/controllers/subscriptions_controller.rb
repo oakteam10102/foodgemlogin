@@ -46,7 +46,11 @@ class SubscriptionsController < ApplicationController
       track = Track.find_by_name(name)
       Preference.create(subscription: subscription, track: track) unless @old_preferences.where(track: track).any?
     end
-    redirect_to(:action => 'payment')
+    if params[:commit] == 'Next step'
+      redirect_to edit_allergies_customer_url(subscription.customer, mode: 'signup')
+    else
+      redirect_to root_url
+    end
   end
 
   def update_area

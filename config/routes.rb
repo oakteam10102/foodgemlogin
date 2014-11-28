@@ -38,11 +38,11 @@ default_url_options :host => "localhost:3030"
     end
   end
   
-  get  'subscriptions/:id/payment', to: 'subscriptions#payment'
-  post 'subscriptions/:id/update_area', to: 'subscriptions#update_area'
-  post 'subscriptions/:id/update_day_lunch', to: 'subscriptions#update_day_lunch'
-  post 'subscriptions/:id/update_day_dinner', to: 'subscriptions#update_day_dinner'
-  post 'subscriptions/:id/update_preferences', to: 'subscriptions#update_preferences'
+  get  'subscriptions/:id/payment',             to: 'subscriptions#payment',            as: 'edit_payment'
+  post 'subscriptions/:id/update_area',         to: 'subscriptions#update_area'
+  post 'subscriptions/:id/update_day_lunch',    to: 'subscriptions#update_day_lunch'
+  post 'subscriptions/:id/update_day_dinner',   to: 'subscriptions#update_day_dinner'
+  post 'subscriptions/:id/update_preferences',  to: 'subscriptions#update_preferences'
   get  'subscriptions/:id/quiz', to: 'subscriptions#preference_quiz', as: 'quiz'
 
   get 'customers/:id/edit_allergies', to: 'customers#edit_allergies', as: 'edit_allergies_customer'

@@ -36,7 +36,7 @@ class CustomersController < ApplicationController
     redirect_to root_url if @customer != current_customer
 
     old_allergen_ids = @customer.allergen_ids
-    new_allergen_ids = params[:allergen_ids]
+    new_allergen_ids = params[:allergen_ids] ? params[:allergen_ids] : []
 
 
 
@@ -52,7 +52,11 @@ class CustomersController < ApplicationController
       end
     end
 
-    redirect_to root_url
+    if params[:commit] == "Save allergies"
+      redirect_to root_url
+    else
+      redirect_to edit_payment_url(@customer.subscription, mode: 'signup')
+    end
   end
 
 end
