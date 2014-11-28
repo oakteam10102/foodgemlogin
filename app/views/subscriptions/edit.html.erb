@@ -117,7 +117,7 @@
                 <div class="col-md-1">
                 </div>
                 <div class="col-md-10">
-                    <h4 class="service-heading" style="color: #777;"><span style="color: #fed136;" class="navpreferences gopreferences"> Choose Preferences </span>&nbsp;&nbsp;▸&nbsp;&nbsp;<span class="navfollowfriend gofollowfriend"> Follow friend track </span>&nbsp;&nbsp;▸&nbsp;&nbsp;<span class="navday goday">Choose Delivery Time</span> </h4>
+                    <h4 class="service-heading" style="color: #777;"><span style="color: #fed136;" class="navpreferences gopreferences"> Choose Preferences </span>&nbsp;&nbsp;▸&nbsp;&nbsp;<span class="navday goday">Choose Delivery Time</span> </h4>
                 </div>
                 <div class="col-md-1">
                 </div>
@@ -168,7 +168,7 @@
             <div class="row">
                 <% @follow_a_friend_tracks.each do |track| %> 
                   <div class="goday col-md-4 col-sm-6 portfolio-item" style="height: 354px;">
-                    <a class="portfolio-link selecttrack" data-toggle="modal" onclick="select_track(<%= track.id %>);">
+                    <a class="portfolio-link selecttrack" data-toggle="modal"> <!-- onclick="select_track(<%= track.id %>);" -->
                         <div class="portfolio-hover <%= 'portfolio-darkorange-hover' if @preferences.where(track: track).any? %>" id="portfolio_<%= track.id %>">
                             <div class="portfolio-hover-content">
                                 <i class="fa fa-plus fa-3x"></i>
@@ -180,7 +180,7 @@
                     <div class="portfolio-caption">
                         <% c = Customer.joins(subscription: {preferences: :track}).where("tracks.id=?", track.id) %>
                         <h4><%= " #{track} " %></h4>
-                        <p class="text-muted"><%= track.description %></p>
+                        <p class="text-muted"><%= link_to 'Read more', follow_a_friend_subscription_path(@subscription.id, :track_id => track.id), :target => '_blank' %></p>
                         <p class="text-muted"><%= pluralize(c.count, 'person') %> follow this track</p>
                     </div>
                   </div>
@@ -281,6 +281,12 @@
             </div>
         </div>
     </section>
+
+<div class="col-md-10">
+    <h4 class="service-heading">
+        <span class="gofollowfriend"><%= link_to "Or, you can choose to eat what your friends eat and follow a friend's track here", '#' %> </span>
+    </h4>
+</div>
 
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="padding: 200px 0 0 0;">
     <div class="modal-dialog">

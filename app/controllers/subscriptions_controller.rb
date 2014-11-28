@@ -103,6 +103,10 @@ class SubscriptionsController < ApplicationController
   def preference_quiz
   end
 
+  def follow_a_friend
+    @track=Track.find(params["track_id"]) rescue nil
+  end
+
 
   private
     def preference_params

@@ -29,7 +29,11 @@ default_url_options :host => "localhost:3030"
 
   resources :addresses, only: [:new, :edit, :update]
 
-  resources :subscriptions, only: [:create, :edit, :update, :new]
+  resources :subscriptions, only: [:create, :edit, :update, :new] do
+    member do
+      get 'follow_a_friend'
+    end
+  end
   get  'subscriptions/:id/payment', to: 'subscriptions#payment'
   post 'subscriptions/:id/update_area', to: 'subscriptions#update_area'
   post 'subscriptions/:id/update_day_lunch', to: 'subscriptions#update_day_lunch'

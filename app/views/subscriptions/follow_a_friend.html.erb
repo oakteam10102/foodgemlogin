@@ -1,0 +1,39 @@
+<% if @track %>
+	<section style="padding: 10px 0 0 0;">
+	    <div class="container">
+	        <div class="row text-center">
+	            <div class="col-md-1">
+	            </div>
+	            <div class="col-md-10">
+	                <h4 class="service-heading" style="color: #777;"><span>Follow a Friend #<%= @track.id %></span> </h4>
+	            </div>
+	            <div class="col-md-1">
+	            </div>
+	        </div>
+	    </div>
+	    <div class="col-md-6 form-group">
+		    <img src="<%= @track.image %>" class="img-responsive" alt="">
+		</div>
+		<div class="col-md-6 form-group">
+		    <label for="textbox2">Name</label>
+		    <p><%= @track.name %></p>
+		    <label for="textbox2">Description</label>
+		    <p><%= @track.description %></p>
+		</div>
+<span class="clearfix">
+	</section>
+<% else %>
+	<section style="padding: 10px 0 0 0;">
+	    <div class="container">
+	        <div class="row text-center">
+	            <div class="col-md-1">
+	            </div>
+	            <div class="col-md-10">
+	                <h4> No Track Found </h4>
+	            </div>
+	            <div class="col-md-1">
+	            </div>
+	        </div>
+	    </div>
+	</section>
+<% end %>
