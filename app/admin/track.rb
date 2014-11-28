@@ -7,8 +7,7 @@ ActiveAdmin.register Track do
       f.input :name
       f.input :description
       f.input :image
-      f.input :track_type, :label => 'Track Type', :as => :select, :collection => options_for_select(['Main','Follow a Friend'])
-      f.submit
+      f.input :track_type, :label => 'Track Type', :as => :select, :collection => options_for_select(['Main','Follow a Friend'], :selected => f.object.track_type)
     end
   end
 
