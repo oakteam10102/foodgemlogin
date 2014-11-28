@@ -33,7 +33,11 @@ default_url_options :host => "localhost:3030"
     member do
       get 'follow_a_friend'
     end
+    collection do
+      get 'ratings'
+    end
   end
+  
   get  'subscriptions/:id/payment', to: 'subscriptions#payment'
   post 'subscriptions/:id/update_area', to: 'subscriptions#update_area'
   post 'subscriptions/:id/update_day_lunch', to: 'subscriptions#update_day_lunch'
@@ -41,11 +45,11 @@ default_url_options :host => "localhost:3030"
   post 'subscriptions/:id/update_preferences', to: 'subscriptions#update_preferences'
   get  'subscriptions/:id/quiz', to: 'subscriptions#preference_quiz', as: 'quiz'
 
-
   get 'customers/:id/edit_allergies', to: 'customers#edit_allergies', as: 'edit_allergies_customer'
   namespace :management do
     resources :allergens
   end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

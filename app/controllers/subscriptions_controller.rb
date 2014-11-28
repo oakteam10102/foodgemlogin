@@ -107,6 +107,8 @@ class SubscriptionsController < ApplicationController
     @track=Track.find(params["track_id"]) rescue nil
   end
 
+  def ratings    
+  end
 
   private
     def preference_params
