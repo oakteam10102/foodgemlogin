@@ -108,6 +108,8 @@ class SubscriptionsController < ApplicationController
   end
 
   def follow_a_friend
+    @subscription = Subscription.find(params["id"]) rescue nil
+    # abort edit_subscription_path(@subscription).inspect
     @track=Track.find(params["track_id"]) rescue nil
   end
 

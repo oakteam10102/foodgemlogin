@@ -20,7 +20,6 @@
 		    <label for="textbox2">Description</label>
 		    <p><%= @track.description %></p>
 		</div>
-<span class="clearfix">
 	</section>
 <% else %>
 	<section style="padding: 10px 0 0 0;">
@@ -37,3 +36,4 @@
 	    </div>
 	</section>
 <% end %>
+<div class="text-center col-md-12"><%= link_to "Back to main tracks' track", '', :onclick => "window.close();" %></div>
