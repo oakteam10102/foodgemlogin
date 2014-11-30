@@ -1,179 +1,181 @@
 <%= render 'style_edit' %>
 
-  <!-- Services Section -->
-    <section id="services" style="padding: 10px 0 0 0;">
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-md-1">
-                </div>
-                <div class="col-md-10">
-                    <h4 class="service-heading" style="color: #777;"><span style="color: #fed136;" class="navpreferences gopreferences"> Choose Preferences </span>&nbsp;&nbsp;▸&nbsp;&nbsp;<span class="navday goday">Choose Delivery Time</span> 
-                    </h4>
-                </div>
-                <div class="col-md-12">
-                    <h4 class="service-heading" style="color: #777;">
-                        <!-- <span class="gofollowfriend"><%= link_to "or follow a 'FoodGem Friend' track", '#' %> </span> -->
-                        <span class="navfollowfriend gofollowfriend"> or follow a 'FoodGem Friend' track </span>
-                    </h4>
-                </div>
-                <div class="col-md-1">
-                </div>
+<!-- Services Section -->
+<section id="services" style="padding: 10px 0 0 0;">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-10">
+                <h4 class="service-heading" style="color: #777;"><span style="color: #fed136;" class="navpreferences gopreferences"> Choose Preferences </span>&nbsp;&nbsp;▸&nbsp;&nbsp;<span class="navday goday">Choose Delivery Time</span> 
+                </h4>
+            </div>
+            <div class="col-md-12">
+                <h4 class="service-heading" style="color: #777;">
+                    <!-- <span class="gofollowfriend"><%= link_to "or follow a 'FoodGem Friend' track", '#' %> </span> -->
+                    <span class="navfollowfriend gofollowfriend"> or follow a 'FoodGem Friend' track </span>
+                </h4>
+            </div>
+            <div class="col-md-1">
             </div>
         </div>
-    </section>
-    <!-- Portfolio Grid Section -->
-    <section id="portfolio" class="bg-light-gray preferences" style="padding: 50px 0 0 0;">  
+    </div>
+</section>
 
-    	<div class="container">    	      
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Choose Preferences</h2>
-                    <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;">Select a foodie track, but feel free to switch your preferences up to 24 hours before the delivery. </h3>
-                </div>
-            </div>
+<!-- Portfolio Grid Section -->
+<section id="portfolio" class="bg-light-gray preferences" style="padding: 50px 0 0 0;">  
 
-            <div class="row">
-               	<% @main_tracks.each do |track| %> 
-        		  <div class="goday col-md-4 col-sm-6 portfolio-item" style="height: 354px;">
-                    <a class="portfolio-link selecttrack" data-toggle="modal" onclick="select_track(<%= track.id %>);">
-                        <div class="portfolio-hover <%= 'portfolio-darkorange-hover' if @preferences.where(track: track).any? %>" id="portfolio_<%= track.id %>">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="<%= track.image %>" class="img-responsive" alt="">
-                        <input type="hidden" id="track_<%= track.id %>" name="track[]" value="<%= track %>" class="<%= 'select-track-name' if @preferences.where(track: track).any? %>"/>
-                    </a>
-                    <div class="portfolio-caption">
-                        <h4><%= " #{track} " %></h4>
-                        <!--  http://foodgem.com/beta/rating.html -->
-                        <p class="text-muted"><%= track.description %></p><a href="<%= ratings_subscriptions_path %>" class="starmargin" style="display: block;font-family: FontAwesome; margin:0 auto; text-decoration: none;"><i class="fa fa-star starclr"></i><i class="fa fa-star starclr"></i><i class="fa fa-star starclr"></i><i class="fa fa-star starclr"></i><i class="fa fa-star-half-full starclr"></i> [182 <i class="fa fa-group"></i>]<br></a>
-                    </div>
-                  </div>
-    			<% end %>
-            </div> 
-		</div>	       
-    </section>
-
-    <section id="portfolio" class="bg-light-gray followfriend" style="padding: 50px 0 0 0; display: none;">  
-        <div class="container">           
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Follow a Friend Track</h2>
-                    <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;">List of friend's foodie tracks to follow. </h3>
-                </div>
-            </div>
-
-            <div class="row">
-                <% @follow_a_friend_tracks.each do |track| %> 
-                  <div class="goday col-md-4 col-sm-6 portfolio-item" style="height: 354px;">
-                    <a class="portfolio-link selecttrack" data-toggle="modal" onclick="select_track(<%= track.id %>);">
-                        <div class="portfolio-hover <%= 'portfolio-darkorange-hover' if @preferences.where(track: track).any? %>" id="portfolio_<%= track.id %>">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
-                            </div>
-                        </div>
-                        <img src="<%= track.image %>" class="img-responsive" alt="">
-                        <input type="hidden" id="track_<%= track.id %>" name="track[]" value="<%= track %>" class="<%= 'select-track-name' if @preferences.where(track: track).any? %>"/>
-                    </a>
-                    <div class="portfolio-caption">
-                        <% c = Customer.joins(subscription: {preferences: :track}).where("tracks.id=?", track.id) %>
-                        <h4><%= " #{track} " %></h4>
-                        <p class="text-muted"><%= link_to 'Read more', follow_a_friend_subscription_path(@subscription.id, :track_id => track.id), :target => '_blank' %></p>
-                        <p class="text-muted"><%= pluralize(c.count, 'person') %> follow this track</p>
-                    </div>
-                  </div>
-                <% end %>
-            </div>
-        </div>         
-    </section>
-
-    <section id="portfolio" class="bg-light-gray day" style="padding: 50px 0 50px 0; display: none;">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Choose Delivery Time</h2>
-                    <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;">Select which day of the week you'd like your weekly FoodGem Box! <br>Our default times are 12pm and 7pm but you can change it. <br>In our beta, we only allow one selection per week per order. </h3>
-                </div>
-            </div>
-            <%= form_for @subscription, :html => { :role => 'form'} do |f| %>
-                <div class="row text-center" style="padding: 20px 0 20px 0; ">
-                    <h3 class="section-subheading text-muted" style="margin: 5px 0 20px 0;">Lunch Delivery</h3>
-                    <div class="col-md-2 text-center">
-                    </div>
-                    <div class="col-md-8 text-center" style="color: #fff;">
-                    	<% @days.each do |day| %>
-          					<a id="fill-spreadsheet" class="gosubmit page-scroll select-day selectday_lunch <%= 'darkorange_lunch' if @lunches.include?(day) %>"><%= " #{day} " %></a>
-      					<% end %>
-                    </div>
-                    <div class="col-md-2 text-center">
-                    </div>
-                </div>
-                <div class="row text-center" style="padding: 10px 0px 5px; ">
-                    <h3 class="section-subheading text-muted" style="margin: 5px 0 10px 0;">Lunch Time</h3>
-                    <div class="col-md-3 col-sm-1 col-xs-0 text-center">
-                    </div>
-                    <div class="col-md-6 col-sm-10 col-xs-12 text-center">                
-                    	<%= f.time_select :lunch_time, {value: @subscription.lunch_time, minute_step: 15, ampm: true, default: {hour: '12', minute: '00'}},{ :class => 'form-control-day' } %>                
-                    </div>
-                    <div class="col-md-3 col-sm-1 col-xs-0 text-center">
-                    </div>
-                </div>        
-                  			
-                <div class="row text-center" style="padding: 10px 0px 20px; ">
-                    <h3 class="section-subheading text-muted" style="margin: 5px 0 20px 0;">Dinner Delivery</h3>
-                    <div class="col-md-2 text-center">
-                    </div>
-                    <div class="col-md-8 text-center" style="color: #fff; ">
-                    	<% @days.each do |day| %>
-          					<a id="fill-spreadsheet" class="gosubmit page-scroll select-day selectday_dinner <%= 'darkorange_dinner' if @dinners.include?(day) %>"><%= " #{day} " %></a>
-      					<% end %> 
-                    </div>
-                    <div class="col-md-2 text-center">
-                    </div> 
-                </div>
-                <div class="row text-center" style="padding: 10px 0px 10px; ">
-                    <h3 class="section-subheading text-muted" style="margin: 5px 0 10px 0;">Dinner Time</h3>
-                    <div class="col-md-3 col-sm-1 col-xs-0 text-center">
-                    </div>
-                    <div class="col-md-6 col-sm-10 col-xs-12 text-center">                
-                    	<%= f.time_select :dinner_time, {value: @subscription.lunch_time, minute_step: 15, ampm: true, default: {hour: '12', minute: '00'}},{ :class => 'form-control-day' } %>                
-                    </div>
-                    <div class="col-md-3 col-sm-1 col-xs-0 text-center">
-                    </div>
-                </div> 
-
-                
-                <div class="row text-center" style="padding: 10px 0px 20px;">
-                	<h3 class="section-subheading text-muted" style="margin: 5px 0 10px 0;">Extra Notes</h3>
-                    <div class="col-md-3 col-sm-1 col-xs-0 text-center">
-                    </div>
-                    <div class="col-md-6 col-sm-10 col-xs-12 text-center">
-      					<%= f.text_area :extra_notes, {size: "60x8", placeholder:"Comments and extra requests",:class => 'form-control' } %>
-                    </div>
-                    <div class="col-md-3 col-sm-1 col-xs-0 text-center">
-                    </div>
-                </div>
-                <div class="row text-center" style="padding: 10px 0px 20px;">
-                    <div class="col-md-3 text-center">
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <% if params[:mode] == 'signup' %>
-                           <%= submit_tag "Check out", {class: 'btn btn-primary'} %>
-                        <% else %>
-      				       <%= submit_tag "Save changes", {class: 'btn btn-primary'} %>
-                        <% end %>
-      					<%= link_to 'Cancel', root_url, {class: 'btn btn-primary'} %>
-
-                    </div>
-                    <div class="col-md-3 text-center">
-                    </div>
-                </div>           
-            <% end %>
+	<div class="container">    	      
+        <div class="row">
             <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Choose Preferences</h2>
+                <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;">Select a foodie track, but feel free to switch your preferences up to 24 hours before the delivery. </h3>
             </div>
         </div>
-    </section>
+
+        <div class="row">
+           	<% @main_tracks.each do |track| %> 
+    		  <div class="goday col-md-4 col-sm-6 portfolio-item" style="height: 354px;">
+                <a class="portfolio-link selecttrack" data-toggle="modal" onclick="select_track(<%= track.id %>);">
+                    <div class="portfolio-hover <%= 'portfolio-darkorange-hover' if @preferences.where(track: track).any? %>" id="portfolio_<%= track.id %>">
+                        <div class="portfolio-hover-content">
+                            <i class="fa fa-plus fa-3x"></i>
+                        </div>
+                    </div>
+                    <img src="<%= track.image %>" class="img-responsive" alt="">
+                    <input type="hidden" id="track_<%= track.id %>" name="track[]" value="<%= track %>" class="<%= 'select-track-name' if @preferences.where(track: track).any? %>"/>
+                </a>
+                <div class="portfolio-caption">
+                    <h4><%= " #{track} " %></h4>
+                    <!--  http://foodgem.com/beta/rating.html -->
+                    <p class="text-muted"><%= track.description %></p><a href="<%= ratings_subscriptions_path %>" class="starmargin" style="display: block;font-family: FontAwesome; margin:0 auto; text-decoration: none;"><i class="fa fa-star starclr"></i><i class="fa fa-star starclr"></i><i class="fa fa-star starclr"></i><i class="fa fa-star starclr"></i><i class="fa fa-star-half-full starclr"></i> [182 <i class="fa fa-group"></i>]<br></a>
+                </div>
+              </div>
+			<% end %>
+        </div> 
+	</div>	       
+</section>
+
+<section id="portfolio" class="bg-light-gray followfriend" style="padding: 50px 0 0 0; display: none;">  
+    <div class="container">           
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Follow a Friend Track</h2>
+                <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;">List of friend's foodie tracks to follow. </h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <% @follow_a_friend_tracks.each do |track| %> 
+              <div class="goday col-md-4 col-sm-6 portfolio-item" style="height: 354px;">
+                <a class="portfolio-link selecttrack" data-toggle="modal" onclick="select_track(<%= track.id %>);">
+                    <div class="portfolio-hover <%= 'portfolio-darkorange-hover' if @preferences.where(track: track).any? %>" id="portfolio_<%= track.id %>">
+                        <div class="portfolio-hover-content">
+                            <i class="fa fa-plus fa-3x"></i>
+                        </div>
+                    </div>
+                    <img src="<%= track.image %>" class="img-responsive" alt="">
+                    <input type="hidden" id="track_<%= track.id %>" name="track[]" value="<%= track %>" class="<%= 'select-track-name' if @preferences.where(track: track).any? %>"/>
+                </a>
+                <div class="portfolio-caption">
+                    <% c = Customer.joins(subscription: {preferences: :track}).where("tracks.id=?", track.id) %>
+                    <h4><%= " #{track} " %></h4>
+                    <p class="text-muted"><%= link_to 'Read more', follow_a_friend_subscription_path(@subscription.id, :track_id => track.id), :target => '_blank' %></p>
+                    <p class="text-muted"><%= pluralize(c.count, 'person') %> follow this track</p>
+                </div>
+              </div>
+            <% end %>
+        </div>
+    </div>         
+</section>
+
+<section id="portfolio" class="bg-light-gray day" style="padding: 50px 0 50px 0; display: none;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Choose Delivery Time</h2>
+                <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;">Select which day of the week you'd like your weekly FoodGem Box! <br>Our default times are 12pm and 7pm but you can change it. <br>In our beta, we only allow one selection per week per order. </h3>
+            </div>
+        </div>
+        <%= form_for @subscription, :html => { :role => 'form'} do |f| %>
+            <div class="row text-center" style="padding: 20px 0 20px 0; ">
+                <h3 class="section-subheading text-muted" style="margin: 5px 0 20px 0;">Lunch Delivery</h3>
+                <div class="col-md-2 text-center">
+                </div>
+                <div class="col-md-8 text-center" style="color: #fff;">
+                  <% @days.each do |day| %>
+                    <a id="fill-spreadsheet" class="gosubmit page-scroll select-day selectday_lunch <%= 'darkorange_lunch' if @lunches.include?(day) %>"><%= " #{day} " %></a>
+                  <% end %>
+                </div>
+                <div class="col-md-2 text-center">
+                </div>
+            </div>
+            <div class="row text-center" style="padding: 10px 0px 5px; ">
+                <h3 class="section-subheading text-muted" style="margin: 5px 0 10px 0;">Lunch Time</h3>
+                <div class="col-md-3 col-sm-1 col-xs-0 text-center">
+                </div>
+                <div class="col-md-6 col-sm-10 col-xs-12 text-center">                
+                  <%= f.time_select :lunch_time, {value: @subscription.lunch_time, minute_step: 15, ampm: true, default: {hour: '12', minute: '00'}},{ :class => 'form-control-day' } %>                
+                </div>
+                <div class="col-md-3 col-sm-1 col-xs-0 text-center">
+                </div>
+            </div>        
+                    
+            <div class="row text-center" style="padding: 10px 0px 20px; ">
+                <h3 class="section-subheading text-muted" style="margin: 5px 0 20px 0;">Dinner Delivery</h3>
+                <div class="col-md-2 text-center">
+                </div>
+                <div class="col-md-8 text-center" style="color: #fff; ">
+                  <% @days.each do |day| %>
+                <a id="fill-spreadsheet" class="gosubmit page-scroll select-day selectday_dinner <%= 'darkorange_dinner' if @dinners.include?(day) %>"><%= " #{day} " %></a>
+            <% end %> 
+                </div>
+                <div class="col-md-2 text-center">
+                </div> 
+            </div>
+            <div class="row text-center" style="padding: 10px 0px 10px; ">
+                <h3 class="section-subheading text-muted" style="margin: 5px 0 10px 0;">Dinner Time</h3>
+                <div class="col-md-3 col-sm-1 col-xs-0 text-center">
+                </div>
+                <div class="col-md-6 col-sm-10 col-xs-12 text-center">                
+                  <%= f.time_select :dinner_time, {value: @subscription.lunch_time, minute_step: 15, ampm: true, default: {hour: '12', minute: '00'}},{ :class => 'form-control-day' } %>                
+                </div>
+                <div class="col-md-3 col-sm-1 col-xs-0 text-center">
+                </div>
+            </div> 
+
+
+            <div class="row text-center" style="padding: 10px 0px 20px;">
+              <h3 class="section-subheading text-muted" style="margin: 5px 0 10px 0;">Extra Notes</h3>
+                <div class="col-md-3 col-sm-1 col-xs-0 text-center">
+                </div>
+                <div class="col-md-6 col-sm-10 col-xs-12 text-center">
+            <%= f.text_area :extra_notes, {size: "60x8", placeholder:"Comments and extra requests",:class => 'form-control' } %>
+                </div>
+                <div class="col-md-3 col-sm-1 col-xs-0 text-center">
+                </div>
+            </div>
+
+            <div class="row text-center" style="padding: 10px 0px 20px;">
+                <div class="col-md-3 text-center">
+                </div>
+                <div class="col-md-6 text-center">
+                    <% if params[:mode] == 'signup' %>
+                       <%= submit_tag "Check out", {class: 'btn btn-primary'} %>
+                    <% else %>
+  				       <%= submit_tag "Save changes", {class: 'btn btn-primary'} %>
+                    <% end %>
+  					<%= link_to 'Cancel', root_url, {class: 'btn btn-primary'} %>
+
+                </div>
+                <div class="col-md-3 text-center">
+                </div>
+            </div>           
+        <% end %>
+        <div class="col-lg-12 text-center">
+        </div>
+    </div>
+</section>
 
 
 
@@ -183,12 +185,6 @@
     </h4>
 </div> -->
 
-<form id="foo" style="display: none;" >
-    <input id="email" name="address[email]" type="text" value="<%= @address.email %>">
-    <input id="phone" name="address[phone]" type="text" value="<%= @address.phone %>">
-    <input id="zipcode" name="address[zip]" type="text" value="">
-    <input type="submit" value="Send">
-</form>
 <script>
     var lunch_arr = [],dinner_arr = [],t_names,lunch,lunch_words,lunchslistarr,dinner,dinner_words,dinnerslistarr ;
 	$(document).ready(function(){
