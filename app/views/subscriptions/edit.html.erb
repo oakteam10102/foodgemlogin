@@ -7,14 +7,7 @@
                 <div class="col-md-1">
                 </div>
                 <div class="col-md-10">
-                    <h4 class="service-heading" style="color: #777;"><span style="color: #fed136;" class="navpreferences gopreferences"> Choose Preferences </span>
-                    <% if params[:mode] == 'signup' %>
-                        &nbsp;&nbsp;▸&nbsp;&nbsp;<span class="navallergies goallergies">Allergies and Aversions</span> 
-                    <% end %>
-                    &nbsp;&nbsp;▸&nbsp;&nbsp;<span class="navday goday">Choose Delivery Time</span> 
-                    <% if params[:mode] == 'signup' %>
-                        &nbsp;&nbsp;▸&nbsp;&nbsp;  Check Out
-                    <% end %>
+                    <h4 class="service-heading" style="color: #777;"><span style="color: #fed136;" class="navpreferences gopreferences"> Choose Preferences </span>&nbsp;&nbsp;▸&nbsp;&nbsp;<span class="navday goday">Choose Delivery Time</span> 
                     </h4>
                 </div>
                 <div class="col-md-12">
@@ -95,45 +88,6 @@
         </div>         
     </section>
 
-    <section class="bg-light-gray allergies" style="padding: 50px 0 50px 0; display: none;">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Allergies and Aversions</h2>
-                    <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;">What are your food allergies and aversions?</h3>
-                </div>
-            </div>
-            <%= form_for @subscription, :html => { :role => 'form'} do |f| %>
-                <% @allergens = Allergen.all %>
-                <div class="row">
-                  <% @allergens.each do |allergen| %>
-                  <div class="col-md-4">
-                    <%= check_box_tag 'allergen_ids[]', allergen.id, @subscription.customer.allergen_ids.include?(allergen.id) %>
-                    <%= f.label allergen %>
-                  </div>
-                  <% end %>
-                </div>
-                <div class="row text-center" style="padding: 10px 0px 20px;">
-                    <div class="col-md-3 text-center">
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <% if params[:mode] == 'signup' %>
-                           <%= button_tag "Choose delivery time", {class: 'btn btn-primary', id: 'btn-allergies', type: 'button'} %>
-                        <% else %>
-                           <%= submit_tag "Save changes", {class: 'btn btn-primary'} %>
-                        <% end %>
-                        <%= link_to 'Cancel', root_url, {class: 'btn btn-primary'} %>
-
-                    </div>
-                    <div class="col-md-3 text-center">
-                    </div>
-                </div>           
-            <%# end %>
-            <div class="col-lg-12 text-center">
-            </div>
-        </div>
-    </section>
-    
     <section id="portfolio" class="bg-light-gray day" style="padding: 50px 0 50px 0; display: none;">
         <div class="container">
             <div class="row">
@@ -142,7 +96,7 @@
                     <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;">Select which day of the week you'd like your weekly FoodGem Box! <br>Our default times are 12pm and 7pm but you can change it. <br>In our beta, we only allow one selection per week per order. </h3>
                 </div>
             </div>
-            <%#= form_for @subscription, :html => { :role => 'form'} do |f| %>
+            <%= form_for @subscription, :html => { :role => 'form'} do |f| %>
                 <div class="row text-center" style="padding: 20px 0 20px 0; ">
                     <h3 class="section-subheading text-muted" style="margin: 5px 0 20px 0;">Lunch Delivery</h3>
                     <div class="col-md-2 text-center">
@@ -221,40 +175,13 @@
         </div>
     </section>
 
-    <section id="portfolio" class="bg-light-gray thankyou" style="padding: 50px 0 50px 0; display: none;">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Thank you</h2>
-                    <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;">We'll be emailing you soon to confirm your sign-up and <a href="http://foodgem.com/beta/payment.html" style="color: #777;  text-decoration: none;">payment</a>. Feel free to contact us too at food@foodgem.com.  </h3>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
 <!-- <div class="col-md-10">
     <h4 class="service-heading">
         <span class="gofollowfriend"><%= link_to "or follow a 'FoodGem Friend' track", '#' %> </span>
     </h4>
 </div> -->
-
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="padding: 200px 0 0 0;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h4 class="modal-title">Thanks!</h4>
-            </div>
-            <div class="modal-body">
-                <!-- The form is placed inside the body of modal -->
-                <form id="loginForm" method="post" class="form-horizontal">
-                    Thank you for signing up, our team will be reaching out within the next 24 hours!
-                    <br>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
 
 <form id="foo" style="display: none;" >
     <input id="email" name="address[email]" type="text" value="<%= @address.email %>">
