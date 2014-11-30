@@ -90,20 +90,20 @@
         display: block;
     }
     .form-control-day {
-		 width: 48%;
-		 height: 34px;
-		 padding: 6px 12px;
-		 font-size: 14px;
-		 line-height: 1.428571429;
-		 color: #555555;
-		 background-color: white;
-		 background-image: none;
-		 border: 1px solid #cccccc;
-		 border-radius: 4px;
-		 box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-		 -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-		 transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
-	}
+     width: 48%;
+     height: 34px;
+     padding: 6px 12px;
+     font-size: 14px;
+     line-height: 1.428571429;
+     color: #555555;
+     background-color: white;
+     background-image: none;
+     border: 1px solid #cccccc;
+     border-radius: 4px;
+     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+     -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+     transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  }
     .selectday_lunch { background-color: #fed136; }
     .selectday_lunch:hover, .selectday_lunch.darkorange_lunch { background-color: #FF9933; }    
     .selectday_dinner { background-color: #fed136; }
@@ -117,14 +117,10 @@
                 <div class="col-md-1">
                 </div>
                 <div class="col-md-10">
-                    <h4 class="service-heading" style="color: #777;"><span style="color: #fed136;" class="navpreferences gopreferences"> Choose Preferences </span>
-                    <% if params[:mode] == 'signup' %>
-                        &nbsp;&nbsp;▸&nbsp;&nbsp;<span class="navallergies goallergies">Allergies and Aversions</span> 
-                    <% end %>
+                    <h4 class="service-heading" style="color: #777;"><span style="color: #fed136;" class="navpreferences gopreferences"> Choose Preferences </span><% @subscription %>
+                    &nbsp;&nbsp;▸&nbsp;&nbsp;<span class="navallergies goallergies">Allergies and Aversions</span>
                     &nbsp;&nbsp;▸&nbsp;&nbsp;<span class="navday goday">Choose Delivery Time</span> 
-                    <% if params[:mode] == 'signup' %>
-                        &nbsp;&nbsp;▸&nbsp;&nbsp;  Check Out
-                    <% end %>
+                    &nbsp;&nbsp;▸&nbsp;&nbsp;  Check Out
                     </h4>
                 </div>
                 <div class="col-md-12">
@@ -141,7 +137,7 @@
     <!-- Portfolio Grid Section -->
     <section id="portfolio" class="bg-light-gray preferences" style="padding: 50px 0 0 0;">  
 
-    	<div class="container">    	      
+      <div class="container">           
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Choose Preferences</h2>
@@ -150,8 +146,8 @@
             </div>
 
             <div class="row">
-               	<% @main_tracks.each do |track| %> 
-        		  <div class="goday col-md-4 col-sm-6 portfolio-item" style="height: 354px;">
+                <% @main_tracks.each do |track| %> 
+              <div class="goallergies col-md-4 col-sm-6 portfolio-item" style="height: 354px;">
                     <a class="portfolio-link selecttrack" data-toggle="modal" onclick="select_track(<%= track.id %>);">
                         <div class="portfolio-hover <%= 'portfolio-darkorange-hover' if @preferences.where(track: track).any? %>" id="portfolio_<%= track.id %>">
                             <div class="portfolio-hover-content">
@@ -167,9 +163,9 @@
                         <p class="text-muted"><%= track.description %></p><a href="<%= ratings_subscriptions_path %>" class="starmargin" style="display: block;font-family: FontAwesome; margin:0 auto; text-decoration: none;"><i class="fa fa-star starclr"></i><i class="fa fa-star starclr"></i><i class="fa fa-star starclr"></i><i class="fa fa-star starclr"></i><i class="fa fa-star-half-full starclr"></i> [182 <i class="fa fa-group"></i>]<br></a>
                     </div>
                   </div>
-    			<% end %>
+          <% end %>
             </div> 
-		</div>	       
+    </div>         
     </section>
 
     <section id="portfolio" class="bg-light-gray followfriend" style="padding: 50px 0 0 0; display: none;">  
@@ -183,7 +179,7 @@
 
             <div class="row">
                 <% @follow_a_friend_tracks.each do |track| %> 
-                  <div class="goday col-md-4 col-sm-6 portfolio-item" style="height: 354px;">
+                  <div class="goallergies col-md-4 col-sm-6 portfolio-item" style="height: 354px;">
                     <a class="portfolio-link selecttrack" data-toggle="modal" onclick="select_track(<%= track.id %>);">
                         <div class="portfolio-hover <%= 'portfolio-darkorange-hover' if @preferences.where(track: track).any? %>" id="portfolio_<%= track.id %>">
                             <div class="portfolio-hover-content">
@@ -227,11 +223,7 @@
                     <div class="col-md-3 text-center">
                     </div>
                     <div class="col-md-6 text-center">
-                        <% if params[:mode] == 'signup' %>
-                           <%= button_tag "Choose delivery time", {class: 'btn btn-primary', id: 'btn-allergies', type: 'button'} %>
-                        <% else %>
-                           <%= submit_tag "Save changes", {class: 'btn btn-primary'} %>
-                        <% end %>
+                        <%= button_tag "Choose delivery time", {class: 'btn btn-primary', id: 'btn-allergies', type: 'button'} %>
                         <%= link_to 'Cancel', root_url, {class: 'btn btn-primary'} %>
 
                     </div>
@@ -252,15 +244,15 @@
                     <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;">Select which day of the week you'd like your weekly FoodGem Box! <br>Our default times are 12pm and 7pm but you can change it. <br>In our beta, we only allow one selection per week per order. </h3>
                 </div>
             </div>
-            <%#= form_for @subscription, :html => { :role => 'form'} do |f| %>
+
                 <div class="row text-center" style="padding: 20px 0 20px 0; ">
                     <h3 class="section-subheading text-muted" style="margin: 5px 0 20px 0;">Lunch Delivery</h3>
                     <div class="col-md-2 text-center">
                     </div>
                     <div class="col-md-8 text-center" style="color: #fff;">
-                    	<% @days.each do |day| %>
-          					<a id="fill-spreadsheet" class="gosubmit page-scroll select-day selectday_lunch <%= 'darkorange_lunch' if @lunches.include?(day) %>"><%= " #{day} " %></a>
-      					<% end %>
+                      <% @days.each do |day| %>
+                    <a id="fill-spreadsheet" class="gosubmit page-scroll select-day selectday_lunch <%= 'darkorange_lunch' if @lunches.include?(day) %>"><%= " #{day} " %></a>
+                <% end %>
                     </div>
                     <div class="col-md-2 text-center">
                     </div>
@@ -270,20 +262,20 @@
                     <div class="col-md-3 col-sm-1 col-xs-0 text-center">
                     </div>
                     <div class="col-md-6 col-sm-10 col-xs-12 text-center">                
-                    	<%= f.time_select :lunch_time, {value: @subscription.lunch_time, minute_step: 15, ampm: true, default: {hour: '12', minute: '00'}},{ :class => 'form-control-day' } %>                
+                      <%= f.time_select :lunch_time, {value: @subscription.lunch_time, minute_step: 15, ampm: true, default: {hour: '12', minute: '00'}},{ :class => 'form-control-day' } %>                
                     </div>
                     <div class="col-md-3 col-sm-1 col-xs-0 text-center">
                     </div>
                 </div>        
-                  			
+                        
                 <div class="row text-center" style="padding: 10px 0px 20px; ">
                     <h3 class="section-subheading text-muted" style="margin: 5px 0 20px 0;">Dinner Delivery</h3>
                     <div class="col-md-2 text-center">
                     </div>
                     <div class="col-md-8 text-center" style="color: #fff; ">
-                    	<% @days.each do |day| %>
-          					<a id="fill-spreadsheet" class="gosubmit page-scroll select-day selectday_dinner <%= 'darkorange_dinner' if @dinners.include?(day) %>"><%= " #{day} " %></a>
-      					<% end %> 
+                      <% @days.each do |day| %>
+                    <a id="fill-spreadsheet" class="gosubmit page-scroll select-day selectday_dinner <%= 'darkorange_dinner' if @dinners.include?(day) %>"><%= " #{day} " %></a>
+                <% end %> 
                     </div>
                     <div class="col-md-2 text-center">
                     </div> 
@@ -293,7 +285,7 @@
                     <div class="col-md-3 col-sm-1 col-xs-0 text-center">
                     </div>
                     <div class="col-md-6 col-sm-10 col-xs-12 text-center">                
-                    	<%= f.time_select :dinner_time, {value: @subscription.lunch_time, minute_step: 15, ampm: true, default: {hour: '12', minute: '00'}},{ :class => 'form-control-day' } %>                
+                      <%= f.time_select :dinner_time, {value: @subscription.lunch_time, minute_step: 15, ampm: true, default: {hour: '12', minute: '00'}},{ :class => 'form-control-day' } %>                
                     </div>
                     <div class="col-md-3 col-sm-1 col-xs-0 text-center">
                     </div>
@@ -301,11 +293,11 @@
 
                 
                 <div class="row text-center" style="padding: 10px 0px 20px;">
-                	<h3 class="section-subheading text-muted" style="margin: 5px 0 10px 0;">Extra Notes</h3>
+                  <h3 class="section-subheading text-muted" style="margin: 5px 0 10px 0;">Extra Notes</h3>
                     <div class="col-md-3 col-sm-1 col-xs-0 text-center">
                     </div>
                     <div class="col-md-6 col-sm-10 col-xs-12 text-center">
-      					<%= f.text_area :extra_notes, {size: "60x8", placeholder:"Comments and extra requests",:class => 'form-control' } %>
+                <%= f.text_area :extra_notes, {size: "60x8", placeholder:"Comments and extra requests",:class => 'form-control' } %>
                     </div>
                     <div class="col-md-3 col-sm-1 col-xs-0 text-center">
                     </div>
@@ -314,12 +306,8 @@
                     <div class="col-md-3 text-center">
                     </div>
                     <div class="col-md-6 text-center">
-                        <% if params[:mode] == 'signup' %>
-                           <%= submit_tag "Check out", {class: 'btn btn-primary'} %>
-                        <% else %>
-      				       <%= submit_tag "Save changes", {class: 'btn btn-primary'} %>
-                        <% end %>
-      					<%= link_to 'Cancel', root_url, {class: 'btn btn-primary'} %>
+                      <%= submit_tag "Check out", {class: 'btn btn-primary'} %>
+                      <%= link_to 'Cancel', root_url, {class: 'btn btn-primary'} %>
 
                     </div>
                     <div class="col-md-3 text-center">
@@ -374,37 +362,37 @@
 </form>
 <script>
     var lunch_arr = [],dinner_arr = [],t_names,lunch,lunch_words,lunchslistarr,dinner,dinner_words,dinnerslistarr ;
-	$(document).ready(function(){
-		t_names = $('.select-track-name').map(function(){
-					$(".edit_subscription").append("<input type='hidden' value='"+$(this).val()+"' name='preferences[]' id='hidden_preferences'>" );
-             		return $(this).val()
-    			  }).get();	
-    	lunch =  $(".darkorange_lunch").text();
+  $(document).ready(function(){
+    t_names = $('.select-track-name').map(function(){
+          $(".edit_subscription").append("<input type='hidden' value='"+$(this).val()+"' name='preferences[]' id='hidden_preferences'>" );
+                return $(this).val()
+            }).get(); 
+      lunch =  $(".darkorange_lunch").text();
         lunch_words = lunch;
-		lunchslistarr = lunch_words.split('  ');			
-		$.each(lunchslistarr,function(i,val){
-			$(".edit_subscription").append("<input type='hidden' value='"+$.trim(lunchslistarr[i])+"' name='lunch[]' id='hidden_lunch'>");
-      		lunch_arr.push($.trim(lunchslistarr[i]));  
-		});
-		dinner =  $(".darkorange_dinner").text();
+    lunchslistarr = lunch_words.split('  ');      
+    $.each(lunchslistarr,function(i,val){
+      $(".edit_subscription").append("<input type='hidden' value='"+$.trim(lunchslistarr[i])+"' name='lunch[]' id='hidden_lunch'>");
+          lunch_arr.push($.trim(lunchslistarr[i]));  
+    });
+    dinner =  $(".darkorange_dinner").text();
         dinner_words = dinner;
-		dinnerslistarr = dinner_words.split('  ');		
-		$.each(dinnerslistarr,function(i,val){
-			$(".edit_subscription").append("<input type='hidden' value='"+$.trim(dinnerslistarr[i])+"' name='dinner[]' id='hidden_dinner'>");
-      		dinner_arr.push($.trim(dinnerslistarr[i]));  
-		});
-	});
-	
-	function select_track(track_id) {
-		var portofilio_id = "#portfolio_"+track_id;
-		$(portofilio_id).toggleClass('portfolio-darkorange-hover');
-		var ttt = "#track_"+track_id;
-		$(ttt).toggleClass('select-track-name');
- 		$('input[id=hidden_preferences]').remove();
-		t_names = $('.select-track-name').map(function(){
- 						$(".edit_subscription").append("<input type='hidden' value='"+$(this).val()+"' name='preferences[]' id='hidden_preferences'>" );
-        				return $(this).val()
-    			  }).get();		
+    dinnerslistarr = dinner_words.split('  ');    
+    $.each(dinnerslistarr,function(i,val){
+      $(".edit_subscription").append("<input type='hidden' value='"+$.trim(dinnerslistarr[i])+"' name='dinner[]' id='hidden_dinner'>");
+          dinner_arr.push($.trim(dinnerslistarr[i]));  
+    });
+  });
+  
+  function select_track(track_id) {
+    var portofilio_id = "#portfolio_"+track_id;
+    $(portofilio_id).toggleClass('portfolio-darkorange-hover');
+    var ttt = "#track_"+track_id;
+    $(ttt).toggleClass('select-track-name');
+    $('input[id=hidden_preferences]').remove();
+    t_names = $('.select-track-name').map(function(){
+            $(".edit_subscription").append("<input type='hidden' value='"+$(this).val()+"' name='preferences[]' id='hidden_preferences'>" );
+                return $(this).val()
+            }).get();   
          $(this).children().css('opacity', '100');    
     }
 
@@ -452,31 +440,31 @@
         $(this).toggleClass('darkorange_lunch');
         var lunch1 =  $(".darkorange_lunch").text();
         var lunch_words1 = lunch1;
-		var lunchslistarr1 = lunch_words1.split('  ');	
-		var lunch_arr1=[];	
- 		$('input[id=hidden_lunch]').remove();
-		$.each(lunchslistarr1,function(i,val){
-			lunch_arr1.push($.trim(lunchslistarr1[i]));  
- 			$(".edit_subscription").append("<input type='hidden' value='"+$.trim(lunchslistarr1[i])+"' name='lunch[]' id='hidden_lunch'>");
-		});
+    var lunchslistarr1 = lunch_words1.split('  ');  
+    var lunch_arr1=[];  
+    $('input[id=hidden_lunch]').remove();
+    $.each(lunchslistarr1,function(i,val){
+      lunch_arr1.push($.trim(lunchslistarr1[i]));  
+      $(".edit_subscription").append("<input type='hidden' value='"+$.trim(lunchslistarr1[i])+"' name='lunch[]' id='hidden_lunch'>");
+    });
     });
     
     $(".selectday_dinner").click(function() {
         $(this).toggleClass('darkorange_dinner');
         var dinner1 =  $(".darkorange_dinner").text();
         var dinner_words1 = dinner1;
-		var dinnerslistarr1 = dinner_words1.split('  ');		
-		var dinner_arr1 = [];
- 		$('input[id=hidden_dinner]').remove();
-		$.each(dinnerslistarr1,function(i,val){
- 			$(".edit_subscription").append("<input type='hidden' value='"+$.trim(dinnerslistarr1[i])+"' name='dinner[]' id='hidden_dinner'>");
-      		dinner_arr1.push($.trim(dinnerslistarr1[i]));  
-		});
+    var dinnerslistarr1 = dinner_words1.split('  ');    
+    var dinner_arr1 = [];
+    $('input[id=hidden_dinner]').remove();
+    $.each(dinnerslistarr1,function(i,val){
+      $(".edit_subscription").append("<input type='hidden' value='"+$.trim(dinnerslistarr1[i])+"' name='dinner[]' id='hidden_dinner'>");
+          dinner_arr1.push($.trim(dinnerslistarr1[i]));  
+    });
     });
 
     function getURLParameter(url, name) {
-	    return (RegExp(name + '=' + '(.+?)(&|$)').exec(url)||[,null])[1];
-	}
+      return (RegExp(name + '=' + '(.+?)(&|$)').exec(url)||[,null])[1];
+  }
 
     function showGoPreferences(){
         $(".preferences").slideDown();        

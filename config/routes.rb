@@ -21,6 +21,10 @@ default_url_options :host => "localhost:3030"
 
   get 'general/home'
 
+  devise_scope :customer  do
+    get 'customers/sign_up/subscriptions',        to: 'customers/registrations#edit_subscription',  as: 'edit_subscription_registration'
+  end
+
   devise_for :customers, controllers: { sessions: "customers/sessions", registrations: 'customers/registrations' }
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
@@ -47,9 +51,12 @@ default_url_options :host => "localhost:3030"
 
   get 'customers/:id/edit_allergies', to: 'customers#edit_allergies', as: 'edit_allergies_customer'
   patch 'customers/:id/edit_allergies', to: 'customers#update_allergies', as: 'update_allergies_customer'
+  
   namespace :management do
     resources :allergens
   end
+  
+  
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

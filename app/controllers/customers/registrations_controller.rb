@@ -1,4 +1,6 @@
 class Customers::RegistrationsController < Devise::RegistrationsController
+
+  DAYS = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun']
 # before_filter :configure_sign_up_params, only: [:create]
 # before_filter :configure_account_update_params, only: [:update]
 
@@ -52,6 +54,8 @@ class Customers::RegistrationsController < Devise::RegistrationsController
 
 
 
+
+
     # if resource.save
 
     # super
@@ -65,6 +69,20 @@ class Customers::RegistrationsController < Devise::RegistrationsController
 
     # end
   end
+
+def edit_subscription
+  @subscription = current_customer.subscription
+  @lunches = @subscription.lunch
+  @lunches = [] unless @lunches
+  @dinners = @subscription.dinner
+  @dinners = [] unless @dinners
+  @address = current_customer.address
+  @tracks = Track.all
+  @main_tracks = Track.main_tracks
+  @follow_a_friend_tracks = Track.follow_a_friend_tracks
+  @preferences = Preference.where(subscription: @subscription)
+  @days = DAYS
+end
 
   # GET /resource/edit
   # def edit
@@ -104,7 +122,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
   def after_sign_up_path_for(resource, subscription)
-    edit_subscription_url(subscription, mode: 'signup')
+    edit_subscription_registration_url
 
   end
 
