@@ -21,6 +21,8 @@ class CustomersController < ApplicationController
     @address = Address.create(customer: @customer) unless @address
     @phone = @address.phone
 
+    @other_allergy = OtherAllergy.find_or_create_by(customer: @customer)
+
 
   end
 
@@ -29,6 +31,7 @@ class CustomersController < ApplicationController
     redirect_to root_url if @customer != current_customer
 
     @allergens = Allergen.all
+    @other_allergy = OtherAllergy.find_or_create_by(customer: @customer)
   end
 
   def update_allergies
@@ -52,11 +55,12 @@ class CustomersController < ApplicationController
       end
     end
 
-    if params[:commit] == "Save allergies"
-      redirect_to root_url
-    else
-      redirect_to edit_payment_url(@customer.subscription, mode: 'signup')
-    end
+    other_allergy = OtherAllergy.find_or_initialize_by(customer: @customer)
+    other_allergy.description = params[:other_allergy]
+    other_allergy.save
+
+    redirect_to root_url
+
   end
 
 end
