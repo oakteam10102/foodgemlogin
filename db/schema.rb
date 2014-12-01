@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141128095302) do
+ActiveRecord::Schema.define(version: 20141201154611) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -96,6 +96,15 @@ ActiveRecord::Schema.define(version: 20141128095302) do
 
   add_index "customers", ["email"], name: "index_customers_on_email", unique: true
   add_index "customers", ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
+
+  create_table "other_allergies", force: true do |t|
+    t.text     "description"
+    t.integer  "customer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "other_allergies", ["customer_id"], name: "index_other_allergies_on_customer_id"
 
   create_table "preferences", force: true do |t|
     t.integer  "subscription_id"
