@@ -101,25 +101,33 @@
             </div>
             <%= form_for @subscription, :html => { :role => 'form'} do |f| %>
                 <% @allergens = Allergen.all %>
-                <div class="row">
-                  <% @allergens.each do |allergen| %>
-                  <div class="col-md-4">
-                    <%= check_box_tag 'allergen_ids[]', allergen.id, @subscription.customer.allergen_ids.include?(allergen.id) %>
-                    <%= f.label allergen %>
-                  </div>
-                  <% end %>
-                </div>
-                <div class="row text-center" style="padding: 10px 0px 20px;">
-                    <div class="col-md-3 text-center">
+                <div class='col-md-8 col-md-offset-2'>
+                    <div class="row">
+                      <% @allergens.each do |allergen| %>
+                      <div class="col-md-4">
+                        <%= check_box_tag 'allergen_ids[]', allergen.id, @subscription.customer.allergen_ids.include?(allergen.id) %>
+                        <%= f.label allergen %>
+                      </div>
+                      <% end %>
                     </div>
-                    <div class="col-md-6 text-center">
-                        <%= button_tag "Choose delivery time", {class: 'btn btn-primary', id: 'btn-allergies', type: 'button'} %>
-                        <%= link_to 'Cancel', root_url, {class: 'btn btn-primary'} %>
 
+                    <div class="row"><br>
+                      <%= f.label :other_allergy %>
+                      <%= text_area_tag :other_allergy, @other_allergy.description, {class: 'form-control', placeholder: "Describe your other allergy"} %>
                     </div>
-                    <div class="col-md-3 text-center">
-                    </div>
-                </div>           
+
+                    <div class="row text-center" style="padding: 10px 0px 20px;">
+                        <div class="col-md-3 text-center">
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <%= button_tag "Choose delivery time", {class: 'btn btn-primary', id: 'btn-allergies', type: 'button'} %>
+                            <%= link_to 'Cancel', root_url, {class: 'btn btn-primary'} %>
+
+                        </div>
+                        <div class="col-md-3 text-center">
+                        </div>
+                    </div>           
+                </div>
             <%# end %>
             <div class="col-lg-12 text-center">
             </div>

@@ -58,6 +58,10 @@ class SubscriptionsController < ApplicationController
     if params[:commit] == 'Save changes'
       redirect_to root_url
     else
+      other_allergy = OtherAllergy.find_or_initialize_by(customer: current_customer)
+      other_allergy.description = params[:other_allergy]
+      other_allergy.save
+
       redirect_to edit_payment_url(subscription.customer, mode: 'signup')
     end
   end

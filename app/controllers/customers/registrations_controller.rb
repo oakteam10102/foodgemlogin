@@ -82,6 +82,7 @@ def edit_subscription
   @follow_a_friend_tracks = Track.follow_a_friend_tracks
   @preferences = Preference.where(subscription: @subscription)
   @days = DAYS
+  @other_allergy = OtherAllergy.find_or_create_by(customer: current_customer)
 end
 
   # GET /resource/edit
