@@ -12,7 +12,7 @@ class Management::CustomersController < ApplicationController
     @lunch_time = @subscription.lunch_time_string
     @dinner_time = @subscription.dinner_time_string
     @address = Address.find_by_customer_id(@customer.id)
-
+    @delivered_meals = @customer.delivered_meals
 
   end
 end
