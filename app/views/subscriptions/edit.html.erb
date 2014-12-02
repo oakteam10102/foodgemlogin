@@ -7,7 +7,12 @@
             <div class="col-md-1">
             </div>
             <div class="col-md-10">
-                <h4 class="service-heading" style="color: #777;"><span style="color: #fed136;" class="navpreferences gopreferences"> Choose Preferences </span>&nbsp;&nbsp;▸&nbsp;&nbsp;<span class="navday goday">Choose Delivery Time</span> 
+                <!-- <h4 class="service-heading" style="color: #777;"><span style="color: #fed136;" class="navpreferences gopreferences"> Choose Preferences </span>&nbsp;&nbsp;▸&nbsp;&nbsp;<span class="navday goday">Choose Delivery Time</span></h4> -->
+                <h4 class="service-heading" style="color: #777;"><span style="color: #fed136;" class="navpreferences gopreferences"> Choose Preferences </span>
+                &nbsp;&nbsp;▸&nbsp;&nbsp;<span class="navhealthgoals gohealthgoals">Health Goals</span>
+                &nbsp;&nbsp;▸&nbsp;&nbsp;<span class="navallergies goallergies">Allergies and Aversions</span>
+                &nbsp;&nbsp;▸&nbsp;&nbsp;<span class="navday goday">Choose Delivery Time</span> 
+                &nbsp;&nbsp;▸&nbsp;&nbsp;  Check Out
                 </h4>
             </div>
             <div class="col-md-1">
@@ -23,7 +28,7 @@
         <div class="row">
             <div class="col-lg-12 text-center">
                 <h2 class="section-heading">Choose Preferences</h2>
-                <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;"> Select one of our classic tracks or choose to <span class="navfollowfriend gofollowfriend"><a href='#'> follow a friend </a></span> </h3>
+                <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;"> Select one of our classic tracks or choose to <span class="navfollowfriend gofollowfriend"><a href='#'> follow a friend </a></span> or choose a <span class="navhealthgoals gohealthgoals"><a href='#'> health goal </a></span> </h3>                
             </div>
         </div>
 
@@ -41,7 +46,6 @@
                 </a>
                 <div class="portfolio-caption">
                     <h4><%= " #{track} " %></h4>
-                    <!--  http://foodgem.com/beta/rating.html -->
                     <p class="text-muted"><%= track.description %></p><a href="<%= ratings_subscriptions_path %>" class="starmargin" style="display: block;font-family: FontAwesome; margin:0 auto; text-decoration: none;"><i class="fa fa-star starclr"></i><i class="fa fa-star starclr"></i><i class="fa fa-star starclr"></i><i class="fa fa-star starclr"></i><i class="fa fa-star-half-full starclr"></i> [182 <i class="fa fa-group"></i>]<br></a>
                 </div>
               </div>
@@ -82,6 +86,80 @@
             <% end %>
         </div>
     </div>         
+</section>
+
+<section id="portfolio" class="bg-light-gray healthgoals" style="padding: 50px 0 0 0; display: none;">  
+    <div class="container">           
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Health Goals</h2>
+                <h3 class="section-subheading text-muted" style="margin: 5px 0 10px 0;"> Do you have any health goals? </h3>
+                <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;"> <span class="navpreferences gopreferences"><a href='#'> Back to main tracks </a></span> </h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <% @health_goal_tracks.each do |track| %> 
+              <div class="goday col-md-4 col-sm-6 portfolio-item" style="height: 354px;">
+                <a class="portfolio-link selecttrack" data-toggle="modal" onclick="select_track(<%= track.id %>);">
+                    <div class="portfolio-hover <%= 'portfolio-darkorange-hover' if @preferences.where(track: track).any? %>" id="portfolio_<%= track.id %>">
+                        <div class="portfolio-hover-content">
+                            <i class="fa fa-plus fa-3x"></i>
+                        </div>
+                    </div>
+                    <img src="<%= track.image %>" class="img-responsive" alt="">
+                    <input type="hidden" id="track_<%= track.id %>" name="track[]" value="<%= track %>" class="<%= 'select-track-name' if @preferences.where(track: track).any? %>"/>
+                </a>
+                <div class="portfolio-caption">
+                    <% c = Customer.joins(subscription: {preferences: :track}).where("tracks.id=?", track.id) %>
+                    <h4><%= " #{track} " %></h4>
+                </div>
+              </div>
+            <% end %>
+        </div>
+    </div>         
+</section>
+
+<section class="bg-light-gray allergies" style="padding: 50px 0 50px 0; display: none;">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Allergies and Aversions</h2>
+                <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;">What are your food allergies and aversions?</h3>
+            </div>
+        </div>
+        <%= form_for @subscription, :html => { :role => 'form'} do |f| %>
+            <div class='col-md-8 col-md-offset-2'>
+                <div class="row">
+                  <% @allergens.each do |allergen| %>
+                  <div class="col-md-4">
+                    <%= check_box_tag 'allergen_ids[]', allergen.id, @subscription.customer.allergen_ids.include?(allergen.id) %>
+                    <%= f.label allergen %>
+                  </div>
+                  <% end %>
+                </div>
+
+                <div class="row"><br>
+                  <%= f.label :other_allergy %>
+                  <%= text_area_tag :other_allergy, @other_allergy.description, {class: 'form-control', placeholder: "Describe your other allergy"} %>
+                </div>
+
+                <div class="row text-center" style="padding: 10px 0px 20px;">
+                    <div class="col-md-3 text-center">
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <%= button_tag "Choose delivery time", {class: 'btn btn-primary', id: 'btn-allergies', type: 'button'} %>
+                        <%= link_to 'Cancel', root_url, {class: 'btn btn-primary'} %>
+
+                    </div>
+                    <div class="col-md-3 text-center">
+                    </div>
+                </div>           
+            </div>
+        <% end %>
+        <div class="col-lg-12 text-center">
+        </div>
+    </div>
 </section>
 
 <section id="portfolio" class="bg-light-gray day" style="padding: 50px 0 50px 0; display: none;">
@@ -221,6 +299,7 @@
         hideGoDay();
         hideGoFollowFriend();
         hideGoAllergies();
+        hideGoHealthGoal();
     });
 
     $( ".gofollowfriend" ).click(function() {
@@ -228,6 +307,7 @@
         hideGoPreferences();
         hideGoDay();
         hideGoAllergies;
+        hideGoHealthGoal();
     });
 
     $( ".goallergies" ).click(function() {
@@ -235,6 +315,7 @@
         hideGoPreferences();
         hideGoFollowFriend();
         hideGoDay();
+        hideGoHealthGoal();
     });
     
     $( ".goday" ).click(function() {
@@ -242,6 +323,15 @@
         hideGoPreferences();
         hideGoFollowFriend();
         hideGoAllergies();
+        hideGoHealthGoal();
+    });
+    
+    $( ".gohealthgoals" ).click(function() {
+        showGoHealthGoal();
+        hideGoPreferences();
+        hideGoFollowFriend();
+        hideGoAllergies();
+        hideGoDay();
     });
     
     $( ".gosubmit" ).click(function() {
@@ -306,6 +396,11 @@
         $(".navfollowfriend").css('color', '#fed136');
     }
 
+    function showGoHealthGoal(){        
+        $(".healthgoals").slideDown();
+        $(".navhealthgoals").css('color', '#fed136');
+    }
+
     function hideGoPreferences(){
         $('.preferences').hide();
         $(".navpreferences").css('color', '#777');
@@ -326,8 +421,8 @@
         $(".navfollowfriend").css('color', '#777');
     }
 
-    
-
-
-
+    function hideGoHealthGoal(){
+        $('.healthgoals').hide();
+        $(".navhealthgoals").css('color', '#777');
+    }
 </script>

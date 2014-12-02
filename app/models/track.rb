@@ -4,13 +4,9 @@ class Track < ActiveRecord::Base
   def to_s
     name
   end
-
-def self.main_tracks
-	Track.where(:track_type => 'Main')
-end
-
-def self.follow_a_friend_tracks
-	Track.where(:track_type => 'Follow a Friend')
-end
+  
+	def self.find_tracks(track_type)
+		Track.where(:track_type => track_type)
+	end
 
 end

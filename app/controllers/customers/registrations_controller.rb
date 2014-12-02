@@ -51,22 +51,8 @@ class Customers::RegistrationsController < Devise::RegistrationsController
       end
       respond_with resource
     end
-
-
-
-
-
     # if resource.save
-
     # super
-    
-
-    
-      
-      
-
-
-
     # end
   end
 
@@ -78,8 +64,9 @@ def edit_subscription
   @dinners = [] unless @dinners
   @address = current_customer.address
   @tracks = Track.all
-  @main_tracks = Track.main_tracks
-  @follow_a_friend_tracks = Track.follow_a_friend_tracks
+  @main_tracks = Track.find_tracks('Main')
+  @follow_a_friend_tracks = Track.find_tracks('Follow a Friend')
+  @health_goal_tracks = Track.find_tracks('Health Goals')
   @preferences = Preference.where(subscription: @subscription)
   @days = DAYS
   @other_allergy = OtherAllergy.find_or_create_by(customer: current_customer)

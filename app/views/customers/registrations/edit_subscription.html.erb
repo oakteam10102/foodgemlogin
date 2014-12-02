@@ -8,15 +8,10 @@
                 </div>
                 <div class="col-md-10">
                     <h4 class="service-heading" style="color: #777;"><span style="color: #fed136;" class="navpreferences gopreferences"> Choose Preferences </span><% @subscription %>
+                    &nbsp;&nbsp;▸&nbsp;&nbsp;<span class="navhealthgoals gohealthgoals">Health Goals</span>
                     &nbsp;&nbsp;▸&nbsp;&nbsp;<span class="navallergies goallergies">Allergies and Aversions</span>
                     &nbsp;&nbsp;▸&nbsp;&nbsp;<span class="navday goday">Choose Delivery Time</span> 
                     &nbsp;&nbsp;▸&nbsp;&nbsp;  Check Out
-                    </h4>
-                </div>
-                <div class="col-md-12">
-                    <h4 class="service-heading" style="color: #777;">
-                        <!-- <span class="gofollowfriend"><%= link_to "or follow a 'FoodGem Friend' track", '#' %> </span> -->
-                        <span class="navfollowfriend gofollowfriend"> or follow a 'FoodGem Friend' track </span>
                     </h4>
                 </div>
                 <div class="col-md-1">
@@ -31,13 +26,14 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Choose Preferences</h2>
-                    <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;">Select a foodie track, but feel free to switch your preferences up to 24 hours before the delivery. </h3>
+                    <!-- Select one of our classic tracks or choose to <span class="navfollowfriend gofollowfriend"><a href='#'> follow a friend </a></span> -->
+                    <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;"> Select one of our classic tracks or choose to <span class="navfollowfriend gofollowfriend"><a href='#'> follow a friend </a></span> or choose a <span class="navhealthgoals gohealthgoals"><a href='#'> health goal </a></span> </h3>
                 </div>
             </div>
 
             <div class="row">
                 <% @main_tracks.each do |track| %> 
-              <div class="goallergies col-md-4 col-sm-6 portfolio-item" style="height: 354px;">
+                  <div class="goallergies col-md-4 col-sm-6 portfolio-item" style="height: 354px;">
                     <a class="portfolio-link selecttrack" data-toggle="modal" onclick="select_track(<%= track.id %>);">
                         <div class="portfolio-hover <%= 'portfolio-darkorange-hover' if @preferences.where(track: track).any? %>" id="portfolio_<%= track.id %>">
                             <div class="portfolio-hover-content">
@@ -49,13 +45,12 @@
                     </a>
                     <div class="portfolio-caption">
                         <h4><%= " #{track} " %></h4>
-                        <!--  http://foodgem.com/beta/rating.html -->
                         <p class="text-muted"><%= track.description %></p><a href="<%= ratings_subscriptions_path %>" class="starmargin" style="display: block;font-family: FontAwesome; margin:0 auto; text-decoration: none;"><i class="fa fa-star starclr"></i><i class="fa fa-star starclr"></i><i class="fa fa-star starclr"></i><i class="fa fa-star starclr"></i><i class="fa fa-star-half-full starclr"></i> [182 <i class="fa fa-group"></i>]<br></a>
                     </div>
                   </div>
-          <% end %>
+              <% end %>
             </div> 
-    </div>         
+        </div>         
     </section>
 
     <section id="portfolio" class="bg-light-gray followfriend" style="padding: 50px 0 0 0; display: none;">  
@@ -63,7 +58,8 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Follow a Friend Track</h2>
-                    <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;">List of friend's foodie tracks to follow. </h3>
+                    <h3 class="section-subheading text-muted" style="margin: 5px 0 10px 0;"> List of friend's foodie tracks to follow. </h3>
+                    <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;"> <span class="navpreferences gopreferences"><a href='#'> Back to main tracks </a></span> </h3>
                 </div>
             </div>
 
@@ -84,6 +80,38 @@
                         <h4><%= " #{track} " %></h4>
                         <p class="text-muted"><%= link_to 'Read more', follow_a_friend_subscription_path(@subscription.id, :track_id => track.id), :target => '_blank' %></p>
                         <p class="text-muted"><%= pluralize(c.count, 'person') %> follow this track</p>
+                    </div>
+                  </div>
+                <% end %>
+            </div>
+        </div>         
+    </section>
+
+    <section id="portfolio" class="bg-light-gray healthgoals" style="padding: 50px 0 0 0; display: none;">  
+        <div class="container">           
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Health Goals</h2>
+                    <h3 class="section-subheading text-muted" style="margin: 5px 0 10px 0;"> Do you have any health goals? </h3>
+                    <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;"> <span class="navpreferences gopreferences"><a href='#'> Back to main tracks </a></span> </h3>
+                </div>
+            </div>
+
+            <div class="row">
+                <% @health_goal_tracks.each do |track| %> 
+                  <div class="goday col-md-4 col-sm-6 portfolio-item" style="height: 354px;">
+                    <a class="portfolio-link selecttrack" data-toggle="modal" onclick="select_track(<%= track.id %>);">
+                        <div class="portfolio-hover <%= 'portfolio-darkorange-hover' if @preferences.where(track: track).any? %>" id="portfolio_<%= track.id %>">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="<%= track.image %>" class="img-responsive" alt="">
+                        <input type="hidden" id="track_<%= track.id %>" name="track[]" value="<%= track %>" class="<%= 'select-track-name' if @preferences.where(track: track).any? %>"/>
+                    </a>
+                    <div class="portfolio-caption">
+                        <% c = Customer.joins(subscription: {preferences: :track}).where("tracks.id=?", track.id) %>
+                        <h4><%= " #{track} " %></h4>
                     </div>
                   </div>
                 <% end %>
@@ -299,6 +327,7 @@
         hideGoDay();
         hideGoFollowFriend();
         hideGoAllergies();
+        hideGoHealthGoal();
     });
 
     $( ".gofollowfriend" ).click(function() {
@@ -306,6 +335,7 @@
         hideGoPreferences();
         hideGoDay();
         hideGoAllergies;
+        hideGoHealthGoal();
     });
 
     $( ".goallergies" ).click(function() {
@@ -313,6 +343,7 @@
         hideGoPreferences();
         hideGoFollowFriend();
         hideGoDay();
+        hideGoHealthGoal();
     });
     
     $( ".goday" ).click(function() {
@@ -320,6 +351,15 @@
         hideGoPreferences();
         hideGoFollowFriend();
         hideGoAllergies();
+        hideGoHealthGoal();
+    });
+
+    $( ".gohealthgoals" ).click(function() {
+        showGoHealthGoal();
+        hideGoPreferences();
+        hideGoFollowFriend();
+        hideGoAllergies();
+        hideGoDay();
     });
     
     $( ".gosubmit" ).click(function() {
@@ -384,6 +424,11 @@
         $(".navfollowfriend").css('color', '#fed136');
     }
 
+    function showGoHealthGoal(){        
+        $(".healthgoals").slideDown();
+        $(".navhealthgoals").css('color', '#fed136');
+    }
+
     function hideGoPreferences(){
         $('.preferences').hide();
         $(".navpreferences").css('color', '#777');
@@ -404,8 +449,8 @@
         $(".navfollowfriend").css('color', '#777');
     }
 
-    
-
-
-
+    function hideGoHealthGoal(){
+        $('.healthgoals').hide();
+        $(".navhealthgoals").css('color', '#777');
+    }
 </script>
