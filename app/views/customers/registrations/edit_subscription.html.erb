@@ -97,25 +97,37 @@
                 </div>
             </div>
 
-            <div class="row">
-                <% @health_goal_tracks.each do |track| %> 
-                  <div class="goday col-md-4 col-sm-6 portfolio-item" style="height: 354px;">
-                    <a class="portfolio-link selecttrack" data-toggle="modal" onclick="select_track(<%= track.id %>);">
-                        <div class="portfolio-hover <%= 'portfolio-darkorange-hover' if @preferences.where(track: track).any? %>" id="portfolio_<%= track.id %>">
-                            <div class="portfolio-hover-content">
-                                <i class="fa fa-plus fa-3x"></i>
+            <%= form_for @subscription, :html => { :role => 'form'} do |f| %>
+                <div class='col-md-8 col-md-offset-2'>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <% if @health_goals %>
+                                    <%= collection_check_boxes(:customer, :health_goal_ids, @health_goals, :id, :name) do |b| %>
+                                        <%= b.label(class: "check_box") do %>
+                                          <div class="col-md-12">
+                                            <%= b.check_box  %>
+                                            <%= b.object.name %>
+                                          </div>       
+                                        <% end %>
+                                    <% end %>
+                                <% end %>
                             </div>
                         </div>
-                        <img src="<%= track.image %>" class="img-responsive" alt="">
-                        <input type="hidden" id="track_<%= track.id %>" name="track[]" value="<%= track %>" class="<%= 'select-track-name' if @preferences.where(track: track).any? %>"/>
-                    </a>
-                    <div class="portfolio-caption">
-                        <% c = Customer.joins(subscription: {preferences: :track}).where("tracks.id=?", track.id) %>
-                        <h4><%= " #{track} " %></h4>
                     </div>
-                  </div>
-                <% end %>
-            </div>
+
+                    <div class="row text-center" style="padding: 10px 0px 20px;">
+                        <div class="col-md-3 text-center">
+                        </div>
+                        <div class="col-md-6 text-center">
+                            <%= button_tag "Next track", {class: 'btn btn-primary', id: 'btn-healthgoal', type: 'button'} %>
+                            <%= link_to 'Cancel', root_url, {class: 'btn btn-primary'} %>
+                        </div>
+                        <div class="col-md-3 text-center">
+                        </div>
+                    </div>           
+                </div>
+            <% end %>
         </div>         
     </section>
 
@@ -366,6 +378,14 @@
        //    $(".day").slideToggle();
        //    $(".thankyou").slideToggle();
     });
+
+    $( "#btn-healthgoal").click(function() {
+        showGoAllergies()
+        hideGoPreferences();
+        hideGoFollowFriend();
+        hideGoHealthGoal(); 
+        hideGoDay();
+    }); 
 
     $( "#btn-allergies").click(function() {
         showGoDay();

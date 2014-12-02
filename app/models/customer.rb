@@ -9,6 +9,9 @@ class Customer < ActiveRecord::Base
   has_many :allergies
   has_many :allergens, through: :allergies
   has_one :other_allergy
+  has_many :health_goals
+  has_many :customer_health_goals, through: :health_goals
+  
 
   def to_s
     email

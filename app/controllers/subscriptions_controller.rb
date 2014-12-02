@@ -13,7 +13,7 @@ class SubscriptionsController < ApplicationController
     @tracks = Track.all
     @main_tracks = Track.find_tracks('Main')
     @follow_a_friend_tracks = Track.find_tracks('Follow a Friend')
-    @health_goal_tracks = Track.find_tracks('Health Goals')
+    @health_goals = HealthGoal.all rescue nil
     @preferences = Preference.where(subscription: @subscription)
     @days = DAYS
     @allergens = Allergen.all

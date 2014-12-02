@@ -31,8 +31,6 @@ class Customers::RegistrationsController < Devise::RegistrationsController
       subscription.save
       
       WelcomeMailJob.new.async.perform(@address.customer.id)
-      
-
 
       if resource.active_for_authentication?
         set_flash_message :notice, :signed_up if is_flashing_format?
@@ -66,7 +64,7 @@ def edit_subscription
   @tracks = Track.all
   @main_tracks = Track.find_tracks('Main')
   @follow_a_friend_tracks = Track.find_tracks('Follow a Friend')
-  @health_goal_tracks = Track.find_tracks('Health Goals')
+  @health_goals = HealthGoal.all rescue nil
   @preferences = Preference.where(subscription: @subscription)
   @days = DAYS
   @other_allergy = OtherAllergy.find_or_create_by(customer: current_customer)
