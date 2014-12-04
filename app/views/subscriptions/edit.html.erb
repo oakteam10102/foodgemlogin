@@ -22,8 +22,7 @@
 
 <!-- Portfolio Grid Section -->
 <%= form_for @subscription, :html => { :role => 'form'} do |f| %>
-<section id="portfolio" class="bg-light-gray preferences" style="padding: 50px 0 0 0;">  
-
+<section id="portfolio" class="bg-light-gray preferences" style="padding: 50px 0 0 0;">
 	<div class="container">    	      
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -34,7 +33,7 @@
 
         <div class="row">
            	<% @main_tracks.each do |track| %> 
-    		  <div class="goday col-md-4 col-sm-6 portfolio-item" style="height: 354px;">
+    		  <div class="gohealthgoals col-md-4 col-sm-6 portfolio-item" style="height: 354px;">
                 <a class="portfolio-link selecttrack" data-toggle="modal" onclick="select_track(<%= track.id %>);">
                     <div class="portfolio-hover <%= 'portfolio-darkorange-hover' if @preferences.where(track: track).any? %>" id="portfolio_<%= track.id %>">
                         <div class="portfolio-hover-content">
@@ -66,7 +65,7 @@
 
         <div class="row">
             <% @follow_a_friend_tracks.each do |track| %> 
-              <div class="goday col-md-4 col-sm-6 portfolio-item" style="height: 354px;">
+              <div class="gohealthgoals col-md-4 col-sm-6 portfolio-item" style="height: 354px;">
                 <a class="portfolio-link selecttrack" data-toggle="modal" onclick="select_track(<%= track.id %>);">
                     <div class="portfolio-hover <%= 'portfolio-darkorange-hover' if @preferences.where(track: track).any? %>" id="portfolio_<%= track.id %>">
                         <div class="portfolio-hover-content">
