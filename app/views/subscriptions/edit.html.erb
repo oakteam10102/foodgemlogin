@@ -7,7 +7,6 @@
             <div class="col-md-1">
             </div>
             <div class="col-md-10">
-                <!-- <h4 class="service-heading" style="color: #777;"><span style="color: #fed136;" class="navpreferences gopreferences"> Choose Preferences </span>&nbsp;&nbsp;▸&nbsp;&nbsp;<span class="navday goday">Choose Delivery Time</span></h4> -->
                 <h4 class="service-heading" style="color: #777;"><span style="color: #fed136;" class="navpreferences gopreferences"> Choose Preferences </span>
                 &nbsp;&nbsp;▸&nbsp;&nbsp;<span class="navhealthgoals gohealthgoals">Health Goals</span>
                 &nbsp;&nbsp;▸&nbsp;&nbsp;<span class="navallergies goallergies">Allergies and Aversions</span>
@@ -121,7 +120,7 @@
                     <div class="col-md-3 text-center">
                     </div>
                     <div class="col-md-6 text-center">
-                        <%= button_tag "Next track", {class: 'btn btn-primary', id: 'btn-healthgoal', type: 'submit'} %>
+                        <%= submit_tag "Next track", {class: 'btn btn-primary', id: 'btn-healthgoal'} %>
                         <%= link_to 'Cancel', root_url, {class: 'btn btn-primary'} %>
                     </div>
                     <div class="col-md-3 text-center">

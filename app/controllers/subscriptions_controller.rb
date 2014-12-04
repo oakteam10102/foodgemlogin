@@ -117,9 +117,9 @@ class SubscriptionsController < ApplicationController
     render :text => 'updated preferences'
   end 
 
-  def customer_health_goals
+  def customer_health_goals    
     params['customer']['health_goal_ids'].each do |cust_heal_gl|
-      CutomerHealthGoal.create(:customer_id => current_customer.id, health_goal_id => cust_heal_gl) if cust_heal_gl!=''
+      CustomerHealthGoal.create(:customer_id => current_customer.id, :health_goal_id => cust_heal_gl.to_i) if cust_heal_gl!=''
     end
   end
     
@@ -132,7 +132,6 @@ class SubscriptionsController < ApplicationController
 
   def follow_a_friend
     @subscription = Subscription.find(params["id"]) rescue nil
-    # abort edit_subscription_path(@subscription).inspect
     @track=Track.find(params["track_id"]) rescue nil
   end
 
