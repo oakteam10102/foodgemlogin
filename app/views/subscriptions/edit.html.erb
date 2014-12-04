@@ -21,6 +21,7 @@
 </section>
 
 <!-- Portfolio Grid Section -->
+<%= form_for @subscription, :html => { :role => 'form'} do |f| %>
 <section id="portfolio" class="bg-light-gray preferences" style="padding: 50px 0 0 0;">  
 
 	<div class="container">    	      
@@ -97,37 +98,35 @@
             </div>
         </div>
 
-        <%= form_for @subscription, :url => customer_health_goals_path(:path => 'edit_subscription'), :html => { :role => 'form'} do |f| %>
-            <div class='col-md-8 col-md-offset-2'>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <% if @health_goals %>
-                                <%= collection_check_boxes(:customer, :health_goal_ids, @health_goals, :id, :name) do |b| %>
-                                    <%= b.label(class: "check_box") do %>
-                                      <div class="col-md-12">
-                                        <%= b.check_box  %>
-                                        <%= b.object.name %>
-                                      </div>       
-                                    <% end %>
+        <div class='col-md-8 col-md-offset-2'>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <% if @health_goals %>
+                            <%= collection_check_boxes(:customer, :health_goal_ids, @health_goals, :id, :name) do |b| %>
+                                <%= b.label(class: "check_box") do %>
+                                  <div class="col-md-12">
+                                    <%= b.check_box :checked => (@customer_health_goal_ids && @customer_health_goal_ids.include?(b.object.id)) ? 'checked' : '' %>
+                                    <%= b.object.name %>
+                                  </div>       
                                 <% end %>
                             <% end %>
-                        </div>
+                        <% end %>
                     </div>
                 </div>
-
-                <div class="row text-center" style="padding: 10px 0px 20px;">
-                    <div class="col-md-3 text-center">
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <%= submit_tag "Next track", {class: 'btn btn-primary', id: 'btn-healthgoal'} %>
-                        <%= link_to 'Cancel', root_url, {class: 'btn btn-primary'} %>
-                    </div>
-                    <div class="col-md-3 text-center">
-                    </div>
-                </div>           
             </div>
-        <% end %>
+
+            <div class="row text-center" style="padding: 10px 0px 20px;">
+                <div class="col-md-3 text-center">
+                </div>
+                <div class="col-md-6 text-center">
+                    <%= button_tag "Next track", {class: 'btn btn-primary', id: 'btn-healthgoal', type: 'button'} %>
+                    <%= link_to 'Cancel', root_url, {class: 'btn btn-primary'} %>
+                </div>
+                <div class="col-md-3 text-center">
+                </div>
+            </div>           
+        </div>
     </div>         
 </section>
 
@@ -139,35 +138,33 @@
                 <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;">What are your food allergies and aversions?</h3>
             </div>
         </div>
-        <%= form_for @subscription, :html => { :role => 'form'} do |f| %>
-            <div class='col-md-8 col-md-offset-2'>
-                <div class="row">
-                  <% @allergens.each do |allergen| %>
-                  <div class="col-md-4">
-                    <%= check_box_tag 'allergen_ids[]', allergen.id, @subscription.customer.allergen_ids.include?(allergen.id) %>
-                    <%= f.label allergen %>
-                  </div>
-                  <% end %>
-                </div>
-
-                <div class="row"><br>
-                  <%= f.label :other_allergy %>
-                  <%= text_area_tag :other_allergy, @other_allergy.description, {class: 'form-control', placeholder: "Describe your other allergy"} %>
-                </div>
-
-                <div class="row text-center" style="padding: 10px 0px 20px;">
-                    <div class="col-md-3 text-center">
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <%= button_tag "Choose delivery time", {class: 'btn btn-primary', id: 'btn-allergies', type: 'button'} %>
-                        <%= link_to 'Cancel', root_url, {class: 'btn btn-primary'} %>
-
-                    </div>
-                    <div class="col-md-3 text-center">
-                    </div>
-                </div>           
+        <div class='col-md-8 col-md-offset-2'>
+            <div class="row">
+              <% @allergens.each do |allergen| %>
+              <div class="col-md-4">
+                <%= check_box_tag 'allergen_ids[]', allergen.id, @subscription.customer.allergen_ids.include?(allergen.id) %>
+                <%= f.label allergen %>
+              </div>
+              <% end %>
             </div>
-        <% end %>
+
+            <div class="row"><br>
+              <%= f.label :other_allergy %>
+              <%= text_area_tag :other_allergy, @other_allergy.description, {class: 'form-control', placeholder: "Describe your other allergy"} %>
+            </div>
+
+            <div class="row text-center" style="padding: 10px 0px 20px;">
+                <div class="col-md-3 text-center">
+                </div>
+                <div class="col-md-6 text-center">
+                    <%= button_tag "Choose delivery time", {class: 'btn btn-primary', id: 'btn-allergies', type: 'button'} %>
+                    <%= link_to 'Cancel', root_url, {class: 'btn btn-primary'} %>
+
+                </div>
+                <div class="col-md-3 text-center">
+                </div>
+            </div>           
+        </div>
         <div class="col-lg-12 text-center">
         </div>
     </div>
@@ -181,7 +178,6 @@
                 <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;">Select which day of the week you'd like your weekly FoodGem Box! <br>Our default times are 12pm and 7pm but you can change it. <br>In our beta, we only allow one selection per week per order. </h3>
             </div>
         </div>
-        <%= form_for @subscription, :html => { :role => 'form'} do |f| %>
             <div class="row text-center" style="padding: 20px 0 20px 0; ">
                 <h3 class="section-subheading text-muted" style="margin: 5px 0 20px 0;">Lunch Delivery</h3>
                 <div class="col-md-2 text-center">
@@ -211,8 +207,8 @@
                 </div>
                 <div class="col-md-8 text-center" style="color: #fff; ">
                   <% @days.each do |day| %>
-                <a id="fill-spreadsheet" class="gosubmit page-scroll select-day selectday_dinner <%= 'darkorange_dinner' if @dinners.include?(day) %>"><%= " #{day} " %></a>
-            <% end %> 
+                    <a id="fill-spreadsheet" class="gosubmit page-scroll select-day selectday_dinner <%= 'darkorange_dinner' if @dinners.include?(day) %>"><%= " #{day} " %></a>
+                  <% end %> 
                 </div>
                 <div class="col-md-2 text-center">
                 </div> 
@@ -255,19 +251,12 @@
                 <div class="col-md-3 text-center">
                 </div>
             </div>           
-        <% end %>
+        
         <div class="col-lg-12 text-center">
         </div>
     </div>
 </section>
-
-
-
-<!-- <div class="col-md-10">
-    <h4 class="service-heading">
-        <span class="gofollowfriend"><%= link_to "or follow a 'FoodGem Friend' track", '#' %> </span>
-    </h4>
-</div> -->
+<% end %>
 
 <script>
     var lunch_arr = [],dinner_arr = [],t_names,lunch,lunch_words,lunchslistarr,dinner,dinner_words,dinnerslistarr ;

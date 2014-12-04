@@ -18,10 +18,21 @@ class SubscriptionsController < ApplicationController
     @days = DAYS
     @allergens = Allergen.all
     @other_allergy = OtherAllergy.find_or_create_by(customer: current_customer)
-    @current_customer = current_customer
+    @customer_health_goal_ids=Array.new
+    CustomerHealthGoal.select('health_goal_id').where(:customer_id => current_customer).to_a.map(&:serializable_hash).each do |cust_heal_goal|
+      @customer_health_goal_ids << cust_heal_goal['health_goal_id']
+    end
   end
 
   def update
+    @customer_health_goals = CustomerHealthGoal.where(:customer_id => current_customer)
+    if @customer_health_goals && params['customer']['health_goal_ids']
+      @customer_health_goals.delete_all
+      params['customer']['health_goal_ids'].each do |cust_heal_gl|
+        CustomerHealthGoal.create(:customer_id => current_customer.id, :health_goal_id => cust_heal_gl.to_i) if cust_heal_gl!=''
+      end
+    end
+
     subscription = Subscription.find(params[:id])
     redirect_to root_url if subscription.customer != current_customer
 
@@ -115,12 +126,6 @@ class SubscriptionsController < ApplicationController
       Preference.create(subscription: subscription, track: track) unless @old_preferences.where(track: track).any?
     end
     render :text => 'updated preferences'
-  end 
-
-  def customer_health_goals    
-    params['customer']['health_goal_ids'].each do |cust_heal_gl|
-      CustomerHealthGoal.create(:customer_id => current_customer.id, :health_goal_id => cust_heal_gl.to_i) if cust_heal_gl!=''
-    end
   end
     
   def payment
