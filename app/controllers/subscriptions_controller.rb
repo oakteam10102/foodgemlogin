@@ -18,6 +18,7 @@ class SubscriptionsController < ApplicationController
     @days = DAYS
     @allergens = Allergen.all
     @other_allergy = OtherAllergy.find_or_create_by(customer: current_customer)
+    @current_customer = current_customer
   end
 
   def update
@@ -115,6 +116,12 @@ class SubscriptionsController < ApplicationController
     end
     render :text => 'updated preferences'
   end 
+
+  def customer_health_goals
+    params['customer']['health_goal_ids'].each do |cust_heal_gl|
+      CutomerHealthGoal.create(:customer_id => current_customer.id, health_goal_id => cust_heal_gl) if cust_heal_gl!=''
+    end
+  end
     
   def payment
   	@address = current_customer.address

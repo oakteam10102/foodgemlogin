@@ -23,6 +23,7 @@ default_url_options :host => "localhost:3030"
 
   devise_scope :customer  do
     get 'customers/sign_up/subscriptions',        to: 'customers/registrations#edit_subscription',  as: 'edit_subscription_registration'
+    patch 'customers/:id/health_goals', to: 'subscriptions#customer_health_goals',  as: 'customer_health_goals'
   end
 
   devise_for :customers, controllers: { sessions: "customers/sessions", registrations: 'customers/registrations' }

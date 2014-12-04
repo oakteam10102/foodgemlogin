@@ -98,7 +98,7 @@
             </div>
         </div>
 
-        <%= form_for @subscription, :html => { :role => 'form'} do |f| %>
+        <%= form_for @subscription, :url => customer_health_goals_path(:path => 'edit_subscription'), :html => { :role => 'form'} do |f| %>
             <div class='col-md-8 col-md-offset-2'>
                 <div class="row">
                     <div class="col-md-12">
@@ -121,7 +121,7 @@
                     <div class="col-md-3 text-center">
                     </div>
                     <div class="col-md-6 text-center">
-                        <%= button_tag "Next track", {class: 'btn btn-primary', id: 'btn-healthgoal', type: 'button'} %>
+                        <%= button_tag "Next track", {class: 'btn btn-primary', id: 'btn-healthgoal', type: 'submit'} %>
                         <%= link_to 'Cancel', root_url, {class: 'btn btn-primary'} %>
                     </div>
                     <div class="col-md-3 text-center">
