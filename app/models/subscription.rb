@@ -9,4 +9,12 @@ class Subscription < ActiveRecord::Base
   def to_s
     customer.email rescue ""
   end
+
+  def lunch_time_string
+    lunch_time ? lunch_time.strftime('%H,%M') : "default time" 
+  end
+
+  def dinner_time_string
+    dinner_time ? dinner_time.strftime('%H,%M') : "default time" 
+  end
 end

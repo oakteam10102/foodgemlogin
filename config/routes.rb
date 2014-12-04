@@ -55,6 +55,7 @@ default_url_options :host => "localhost:3030"
   
   namespace :management do
     resources :allergens
+    resources :customers
   end
   
   

@@ -23,7 +23,7 @@
         <%=  customer.subscription.payment_status %>
       </div>
       <div class="col-sm-4">
-        <%= link_to 'View', management_subscription_path(q: customer.email) %>
+        <%= link_to 'View', management_customer_path(customer) %>
       </div>
     </div>
     <br>

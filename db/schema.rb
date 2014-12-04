@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141201154611) do
+ActiveRecord::Schema.define(version: 20141202215015) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -79,6 +79,13 @@ ActiveRecord::Schema.define(version: 20141201154611) do
   add_index "allergies", ["allergen_id"], name: "index_allergies_on_allergen_id"
   add_index "allergies", ["customer_id"], name: "index_allergies_on_customer_id"
 
+  create_table "customer_health_goals", force: true do |t|
+    t.integer  "health_goal_id"
+    t.integer  "curtomer_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "customers", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -96,6 +103,23 @@ ActiveRecord::Schema.define(version: 20141201154611) do
 
   add_index "customers", ["email"], name: "index_customers_on_email", unique: true
   add_index "customers", ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true
+
+  create_table "delivered_meals", force: true do |t|
+    t.string   "name"
+    t.integer  "customer_id"
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delivered_meals", ["customer_id"], name: "index_delivered_meals_on_customer_id"
+  add_index "delivered_meals", ["type"], name: "index_delivered_meals_on_type"
+
+  create_table "health_goals", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "other_allergies", force: true do |t|
     t.text     "description"

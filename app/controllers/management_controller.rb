@@ -10,17 +10,7 @@ class ManagementController < ApplicationController
       @customers = Customer.search(@query).page(params[:page]).per(100)
       if @customers.count == 1
         @customer = @customers.first
-        @subscription = Subscription.find_by_customer_id(@customer.id)
-        if @subscription
-          @preferences = @subscription.preferences
-          @lunches = @subscription.lunch
-          @dinners = @subscription.dinner
-          @extra_notes = @subscription.extra_notes
-          @upcoming_meal = @subscription.upcoming_meal
-          @lunch_time = @subscription.lunch_time ? @subscription.lunch_time.strftime('%H,%M') : "default time" 
-          @dinner_time = @subscription.dinner_time ? @subscription.dinner_time.strftime('%H,%M') : "default time" 
-        end
-        @address = Address.find_by_customer_id(@customer.id)
+        redirect_to management_customer_url(@customer)
       end
     else
    	  @customers = Customer.joins(:subscription).order("subscriptions.payment_status").page(params[:page]).per(100)
@@ -30,14 +20,14 @@ class ManagementController < ApplicationController
   def update_meal
     @subscription = Subscription.find(params[:id])
     if @subscription.update(meal_params)
-      redirect_to management_subscription_url(q: @subscription.customer.email)
+      redirect_to management_customer_url(@subscription.customer)
     end
   end
   
   def update_payment_status
   	@subscription = Subscription.find(params[:id])
     if @subscription.update(payment_params)
-      redirect_to management_subscription_url(q: @subscription.customer.email)
+      redirect_to management_customer_url(@subscription.customer)
     end
   end
 
@@ -61,7 +51,7 @@ class ManagementController < ApplicationController
   def update_customer
     @customer = Customer.find(params[:id])
     if @customer.update(customer_params)
-      redirect_to management_subscription_url(q: @customer.email)
+      redirect_to management_customer_url(@customer)
     else
       render 'edit_customer'
     end
@@ -93,7 +83,7 @@ class ManagementController < ApplicationController
       track = Track.find_by_name(name)
       Preference.create(subscription: subscription, track: track) unless @old_preferences.where(track: track).any?
     end
-    redirect_to management_subscription_url(q: subscription.customer.email)
+    redirect_to management_customer_url(subscription.customer)
   end
 
   private

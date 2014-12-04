@@ -102,7 +102,14 @@
       <%= link_to "Edit address", new_address_path %>
     <% end %>
     <br/><br/>
+
+  <h3> Payment </h3>
+  <%= link_to "Make a payment", edit_payment_path(@subscription) %><br><br>
 	<%= link_to "Your Food Preference Quiz", quiz_path(@subscription.id), {class: 'btn btn-primary'} %>
+
+  
     
   </div>
+
+  
 </div>
