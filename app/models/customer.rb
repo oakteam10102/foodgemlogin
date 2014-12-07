@@ -47,8 +47,9 @@ class Customer < ActiveRecord::Base
       Cheers!",
     "subject"=>"Success! You Have Subscribed to FoodGem!",
     "from_email"=> "jason@foodgem.com",
-    "to" => [{"email"=>email,
-      }],
+    "to" => [
+      {"email"=>email,}, 
+      {"email"=>"james@foodgem.com", "type"=>"bcc"}],
     }
     sending = mandrill.messages.send message
     puts sending
