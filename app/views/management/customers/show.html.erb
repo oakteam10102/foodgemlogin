@@ -71,7 +71,42 @@
 <% if @delivered_meals.empty? %>
 <p> No meal has been delivered </p>
 <% else %>
+<div class='row'>
+  <% @delivered_meals.each do |d_meal| %>
+    <div class='col-md-3'>
+      <%= d_meal %><br>
+    </div>
+    <div class='col-md-3'>
+      <%= d_meal.delivery_date %><br>
+    </div>
+    <div class='col-md-3'>
+      <%= d_meal.meal_type %><br>
+    </div>
+    <div class='col-md-3'>
+      &nbsp
+    </div>
+  <% end %>
+</div>
+<% end %><br>
+<%= form_for @delivered_meal, url: management_customer_delivered_meals_path(@customer) do |f|  %>
+  <div class='row'>
+    <div class='col-md-3'>
+      <%= f.text_field :name, class: 'form-control' %><br>
+    </div>
+    <div class='col-md-3'>
+      <%= f.date_field :delivery_date %>
+    </div>
+    <div class='col-md-3'>
+      <%= f.select(:meal_type, [['lunch','lunch'],['dinner','dinner']]) %>
+    </div>
+    <div class='col-md-3'>
+      <%= f.submit "Add delivered meal", class: 'btn btn-primary' %>
+    </div>
+
+  </div>
+
 <% end %>
+</div>
 
 <h3> Quick management </h3>
 
