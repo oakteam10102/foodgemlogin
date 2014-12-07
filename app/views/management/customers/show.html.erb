@@ -48,9 +48,9 @@
   <%= "#{@address.first_name} #{@address.last_name}" %><br>
   <i class="fa fa-phone"></i>
   <% if @address.phone.blank? %>
-    <em> Unprovided </em> &nbsp &nbsp
+    <em> Unprovided </em> &nbsp; &nbsp;
 <% else %>
-  <%= " #{@address.phone}"  %> &nbsp &nbsp
+  <%= " #{@address.phone}"  %> &nbsp; &nbsp;
 <% end %>
 <i class="fa fa-envelope"></i>
 <% if @address.email.blank? %>
@@ -76,14 +76,14 @@
     <div class='col-md-3'>
       <%= d_meal %><br>
     </div>
-    <div class='col-md-3'>
-      <%= d_meal.delivery_date %><br>
+    <div class='col-md-3 '>
+      <%= d_meal.delivery_date_string %><br>
     </div>
     <div class='col-md-3'>
       <%= d_meal.meal_type %><br>
     </div>
     <div class='col-md-3'>
-      &nbsp
+      &nbsp;
     </div>
   <% end %>
 </div>
@@ -94,7 +94,13 @@
       <%= f.text_field :name, class: 'form-control' %><br>
     </div>
     <div class='col-md-3'>
-      <%= f.date_field :delivery_date %>
+      <%#= f.date_field :delivery_date %>
+      <div class='form-group'>
+        <div class='input-group date' id='datetimepicker1'>
+          <%= f.text_field( :delivery_date, {class: 'form-control', 'data-date-format' => 'YYYY-MM-DD'}) %>
+          <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+        </div>
+      </div>
     </div>
     <div class='col-md-3'>
       <%= f.select(:meal_type, [['lunch','lunch'],['dinner','dinner']]) %>
@@ -106,14 +112,14 @@
   </div>
 
 <% end %>
-</div>
+
 
 <h3> Quick management </h3>
 
-<%= form_for @subscription, url: management_update_meal_path, html: {method: "post", class: "form-horizontal", role: "form"} do |f| %>
+<%= form_for @subscription, url: management_update_meal_path, html: {method: "post", class: "form-horizontal", role: "form", id: 'edit_meal_subscription'} do |f| %>
 <div class="form-group">
-  <%= hidden_field_tag(:id, @subscription.id) %>
-  <%= label_tag(:upcoming_meal, "Upcoming meal:", {class: "col-sm-2 control-label", for: "q"}) %>
+  <%= hidden_field_tag(:id, @subscription.id, id: 'upcoming_meal_id') %>
+  <%= label_tag(:upcoming_meal, "Upcoming meal:", {class: "col-sm-2 control-label", for: "subscription_upcoming_meal"}) %>
   <div class="col-sm-10">
       <div class="input-group">
         <%= f.text_field(:upcoming_meal, {class: "form-control", placeholder: "undefined"}) %>
@@ -127,10 +133,10 @@
 
 <br/>
    
-<%= form_for @subscription, url: management_update_payment_status_path, html: {method: "post", class: "form-horizontal", role: "form"} do |f| %>
+<%= form_for @subscription, url: management_update_payment_status_path, html: {method: "post", class: "form-horizontal", role: "form", id: 'edit_payment_status_subscription'} do |f| %>
   <div class="form-group">
     <%= hidden_field_tag(:id, @subscription.id) %>
-      <%= label_tag(:upcoming_meal, "Payment Status:", {class: "col-sm-2 control-label", for: "q"}) %>
+      <%= label_tag(:upcoming_meal, "Payment Status:", {class: "col-sm-2 control-label", for: "subscription_payment_status"}) %>
       <div class="col-sm-10">
          <div class="input-group">
             <% payment_methods = ["Paid","Unpaid"] %> 
@@ -143,4 +149,11 @@
   </div>
 <% end %>
 
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker({
+          pickTime: false,
+        });
+    });
+</script>
 
