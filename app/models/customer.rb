@@ -22,7 +22,8 @@ class Customer < ActiveRecord::Base
     if query.blank?
       self.all
     else
-      where('email LIKE ?', "%#{query}%").joins(:subscription).order("subscriptions.payment_status")
+      select('(addresses.first_name || " " || addresses.last_name) as \'addresses.full_name\', *')
+      self.joins(:address).where('customers.email LIKE :query_string OR addresses.first_name LIKE :query_string OR addresses.last_name LIKE :query_string', {query_string: "%#{query}%"}).joins(:subscription).order("subscriptions.payment_status")
     end
   end
 

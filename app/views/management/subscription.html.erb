@@ -5,7 +5,7 @@
   <%= label_tag(:q, "Search for:", {class: "col-sm-2 control-label", for: "q"}) %>
   <div class="col-sm-10">
       <div class="input-group">
-        <%= text_field_tag(:q, @query, {class: "form-control", placeholder: "Email"}) %>
+        <%= text_field_tag(:q, @query, {class: "form-control", placeholder: "email, first name, or last name"}) %>
         <span class="input-group-btn">
           <%= submit_tag("Search", class: "btn btn-primary btn-default") %>
         </span>
