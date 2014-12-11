@@ -9,7 +9,7 @@
         </div>
 
 
-        <div class='col-md-8 col-md-offset-3'>
+        <div class='col-md-8 col-md-offset-2'>
             <div class="row">
                 <% if @health_goals %>
                     <%= collection_check_boxes(:customer, :health_goal_ids, @health_goals, :id, :name) do |b| %>
