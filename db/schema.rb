@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141207145444) do
+ActiveRecord::Schema.define(version: 20141211210432) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -81,7 +81,7 @@ ActiveRecord::Schema.define(version: 20141207145444) do
 
   create_table "customer_health_goals", force: true do |t|
     t.integer  "health_goal_id"
-    t.integer  "curtomer_id"
+    t.integer  "customer_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -152,6 +152,10 @@ ActiveRecord::Schema.define(version: 20141207145444) do
     t.time     "lunch_time"
     t.time     "dinner_time"
     t.string   "payment_status"
+    t.integer  "age"
+    t.string   "weight"
+    t.string   "height"
+    t.string   "caloric_target"
   end
 
   add_index "subscriptions", ["customer_id"], name: "index_subscriptions_on_customer_id"

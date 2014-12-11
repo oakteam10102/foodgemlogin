@@ -87,47 +87,7 @@
         </div>         
     </section>
 
-    <section id="portfolio" class="bg-light-gray healthgoals" style="padding: 50px 0 0 0; display: none;">  
-        <div class="container">           
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading">Health Goals</h2>
-                    <h3 class="section-subheading text-muted" style="margin: 5px 0 10px 0;"> Do you have any health goals? </h3>
-                    <h3 class="section-subheading text-muted" style="margin: 5px 0 30px 0;"> <span class="navpreferences gopreferences"><a href='#'> Back to main tracks </a></span> </h3>
-                </div>
-            </div>
-
-            <div class='col-md-8 col-md-offset-2'>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <% if @health_goals %>
-                                <%= collection_check_boxes(:customer, :health_goal_ids, @health_goals, :id, :name) do |b| %>
-                                    <%= b.label(class: "check_box") do %>
-                                      <div class="col-md-12">
-                                        <%= b.check_box  %>
-                                        <%= b.object.name %>
-                                      </div>       
-                                    <% end %>
-                                <% end %>
-                            <% end %>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row text-center" style="padding: 10px 0px 20px;">
-                    <div class="col-md-3 text-center">
-                    </div>
-                    <div class="col-md-6 text-center">
-                        <%= button_tag "Next", {class: 'btn btn-primary', id: 'btn-healthgoal', type: 'button'} %>
-                        <%#= link_to 'Cancel', root_url, {class: 'btn btn-primary'} %>
-                    </div>
-                    <div class="col-md-3 text-center">
-                    </div>
-                </div>           
-            </div>
-        </div>         
-    </section>
+    <%= render partial:  'subscriptions/health_goals_form', locals: {f: f} %>
 
     <section class="bg-light-gray allergies" style="padding: 50px 0 50px 0; display: none;">
         <div class="container">

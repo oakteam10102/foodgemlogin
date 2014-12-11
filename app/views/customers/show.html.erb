@@ -78,7 +78,6 @@
     <p> Other allergy: &nbsp <%= @other_allergy.description.presence || "No other allergy registered" %></p>
     <%= link_to "Edit allergies", edit_allergies_customer_path(@customer) %>
 
-
     <h3> Delivery address </h3> 
     <% if @address %>
       <%= "#{@address.first_name} #{@address.last_name}" %><br>

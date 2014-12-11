@@ -147,7 +147,7 @@ class SubscriptionsController < ApplicationController
     def preference_params
     end
     def subscription_params
-      params.require(:subscription).permit(:lunch_time, :dinner_time, :extra_notes)
+      params.require(:subscription).permit(:lunch_time, :dinner_time, :extra_notes, :age, :height, :weight, :caloric_target)
     end
 	def address_params
       params.require(:address).permit(:first_name, :last_name, :street_address, :suite, :city, :state, :zip, :phone, :email)
