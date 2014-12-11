@@ -50,7 +50,9 @@ class Customer < ActiveRecord::Base
     "from_email"=> "jason@foodgem.com",
     "to" => [
       {"email"=>email,}, 
-      {"email"=>"james@foodgem.com", "type"=>"bcc"}],
+      {"email"=>"james@foodgem.com", "type"=>"bcc"},
+      {"email"=>"jason@foodgem.com", "type"=>"bcc"},
+      ],
     }
     sending = mandrill.messages.send message
     puts sending
