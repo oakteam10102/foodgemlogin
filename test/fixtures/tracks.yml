@@ -1,7 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
+clara:
+  name: Clara
+  description: I love to discover new restaurants, dishes, and unique ingredient combinations.
+  image: http://foodgem.com/mag/wp-content/uploads/2014/12/IMG_1772-300x225.jpg
+  track_type: Follow a Friend
+  details_url: http://foodgem.com/mag/carlyns-track/ 
 
-two:
-  name: MyString
+

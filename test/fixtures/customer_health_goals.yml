@@ -2,8 +2,8 @@
 
 one:
   health_goal_id: 1
-  curtomer_id: 1
+  customer_id: 1
 
 two:
   health_goal_id: 1
-  curtomer_id: 1
+  customer_id: 1
